@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Out! Page Not Found. BeachTennisRef.App</title>
+  <link rel="canonical" href="https://beachtennisref.app/">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0f;
+      color: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .container { max-width: 520px; padding: 2rem; }
+    .scene { margin-bottom: 1.5rem; }
+    .paddle { width: 170px; height: 170px; margin: 0 auto 1rem; }
+    h1 {
+      font-size: 6rem;
+      font-weight: 900;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, #d4a24a, #e6bd6e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    .violation {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #d4a24a;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    .quip { font-size: 1rem; color: #a1a1aa; margin-bottom: 0.5rem; line-height: 1.5; }
+    .sub-quip { font-size: 0.85rem; color: #52525b; margin-bottom: 2rem; font-style: italic; }
+    a.btn {
+      display: inline-block;
+      padding: 0.85rem 1.8rem;
+      background: linear-gradient(135deg, #d4a24a, #b8863a);
+      color: #1a1108;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(212,162,74,0.3);
+      transition: all 0.25s ease;
+    }
+    a.btn:hover { filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,162,74,0.45); }
+  </style>
+
+  <!-- Google tag (gtag.js). TODO: replace placeholder id with the beachtennisref GA4 property -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BEACHTENNIS0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BEACHTENNIS0');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="scene">
+      <!-- Beach tennis paddle + ball -->
+      <svg class="paddle" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sand arc -->
+        <path d="M10 170 Q100 150 190 170" stroke="#b8863a" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+        <!-- Paddle head -->
+        <ellipse cx="80" cy="78" rx="44" ry="52" fill="#1a1108" stroke="#d4a24a" stroke-width="3"/>
+        <!-- Paddle holes -->
+        <circle cx="66" cy="64" r="3" fill="#d4a24a" opacity="0.5"/>
+        <circle cx="94" cy="64" r="3" fill="#d4a24a" opacity="0.5"/>
+        <circle cx="66" cy="92" r="3" fill="#d4a24a" opacity="0.5"/>
+        <circle cx="94" cy="92" r="3" fill="#d4a24a" opacity="0.5"/>
+        <circle cx="80" cy="78" r="3" fill="#d4a24a" opacity="0.5"/>
+        <!-- Handle -->
+        <rect x="72" y="126" width="16" height="44" rx="6" fill="#b8863a"/>
+        <!-- Ball + motion -->
+        <circle cx="150" cy="58" r="14" fill="#e6bd6e"/>
+        <path d="M124 50 H110" stroke="#d4a24a" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <path d="M128 60 H116" stroke="#d4a24a" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <path d="M130 70 H120" stroke="#d4a24a" stroke-width="2.5" stroke-linecap="round" opacity="0.3"/>
+      </svg>
+    </div>
+    <h1>404</h1>
+    <p class="violation">Ball's out.</p>
+    <p class="quip">That shot landed long. This page doesn't exist, so the point goes to the other side.</p>
+    <p class="sub-quip">Change ends. Back to the baseline.</p>
+    <a class="btn" href="/">Return to BeachTennisRef.App</a>
+  </div>
+
+  <script src="/js/analytics.js"></script>
+</body>
+</html>
