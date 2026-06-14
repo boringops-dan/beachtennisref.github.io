@@ -372,17 +372,52 @@ p { color: var(--text-secondary); }
 /* ============================================
    HERO - Bold & Visual
    ============================================ */
+/* Base hero = compact, value-first content header (guide / answer / index pages).
+   Lead with the title and the answer, not a full-viewport CTA. The homepage
+   opts back into the big landing hero via the .hero-home modifier below. */
 .hero-v7 {
+  position: relative;
+  overflow: hidden;
+  padding: 116px 0 1.75rem;
+}
+
+/* Content header text is constrained to a readable column, container-aligned. */
+.hero-v7 .hero-text {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.mega-headline {
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+/* On content pages, marketing is subtle and comes after the value: shrink the
+   hero CTAs from the dominating slab, and pull the answer up tight under it. */
+.hero-v7:not(.hero-home) .hero-pills { margin-bottom: 1.1rem; }
+.hero-v7:not(.hero-home) .hero-buttons { margin-bottom: 0; margin-top: 1.25rem; }
+.hero-v7:not(.hero-home) .hero-buttons .btn-large {
+  padding: 0.6rem 1.15rem;
+  font-size: 0.92rem;
+}
+.hero-v7:not(.hero-home) + .section { padding-top: 1.75rem; }
+
+/* ---- Homepage landing hero (big, two-column, full viewport) ---- */
+.hero-home {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: 96px 0 4rem;
-  position: relative;
-  overflow: hidden;
 }
 
-.hero-v7::before {
+.hero-home::before {
   content: '';
   position: absolute;
   top: -300px;
@@ -393,15 +428,14 @@ p { color: var(--text-secondary); }
   pointer-events: none;
 }
 
-.hero-text {
+.hero-home .hero-text {
+  max-width: none;
+  margin: 0;
   padding: 0 4rem;
-  position: relative;
-  z-index: 1;
 }
 
-.mega-headline {
+.hero-home .mega-headline {
   font-size: clamp(3rem, 6.5vw, 5.5rem);
-  font-weight: 900;
   line-height: 1;
   letter-spacing: -0.04em;
   margin-bottom: 1.75rem;
