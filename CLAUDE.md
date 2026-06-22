@@ -10,7 +10,7 @@ Static marketing site for [BeachTennisRef.App](https://beachtennisref.app) -- a 
 
 ## Analytics
 
-- **Marketing site GA4:** `TODO` -- create a dedicated GA4 property for beachtennisref.app (do NOT reuse the volleyref property `G-MRGTZX69JM`). Add the tag to `<head>` and `js/analytics.js` before `</body>` on every page once the ID exists.
+- **Marketing site GA4:** `G-JELDXQYBLN` -- the dedicated GA4 property for beachtennisref.app (do NOT reuse the volleyref property `G-MRGTZX69JM`). Tag is in `<head>` on every page; event tracking in `js/analytics.js`.
 - **Web app GA4:** tracked separately in the app repo (`web_referee`); the BT app shares the multi-sport build.
 
 ## Key References

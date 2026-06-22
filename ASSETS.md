@@ -27,9 +27,8 @@ HTML already references) and they appear automatically — no markup changes.
 - Accent: sand-gold `#d4a24a` (set in `css/style.css` `:root --primary`), matching the BT app's warm palette. Volleyball orange is intentionally NOT used here.
 - Domain: `beachtennisref.app`; app/CTA: `https://app.beachtennisref.app`.
 
-## Analytics — TODO
+## Analytics
 
-Every page's `<head>` has a `gtag` snippet with a **placeholder** measurement id
-`G-BEACHTENNIS0` (a no-op until replaced). Create a dedicated GA4 property for
-beachtennisref.app and replace that id site-wide (do NOT reuse the volleyref
-property `G-MRGTZX69JM`).
+Every page's `<head>` has a `gtag` snippet wired to the dedicated GA4 property
+`G-JELDXQYBLN` (beachtennisref.app). Do NOT reuse the volleyref property
+`G-MRGTZX69JM`. The id is greppable site-wide: `grep -rl G-JELDXQYBLN`.

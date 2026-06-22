@@ -517,6 +517,67 @@ p { color: var(--text-secondary); }
 }
 
 /* ============================================
+   APP SCREENSHOT — phone device frame
+   Real captures of the app, framed as a phone.
+   ============================================ */
+.device-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 38px;
+  background: linear-gradient(160deg, #3a3a42, #101013 58%);
+  box-shadow:
+    var(--shadow-lg),
+    var(--shadow-glow),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.55);
+  box-sizing: border-box;
+}
+
+.device-frame .device-screen {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1000 / 1558;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 28px;
+  background: var(--bg);
+}
+
+/* Hero phone: a touch larger, with a subtle tilt on wide screens */
+.device-frame--hero {
+  max-width: 300px;
+}
+@media (min-width: 900px) {
+  .device-frame--hero {
+    transform: perspective(1400px) rotateY(-4deg) rotateX(1deg);
+  }
+}
+
+/* In-content screenshot figure (woven beside copy on content pages) */
+.app-figure {
+  margin: 2.75rem auto;
+  max-width: 320px;
+  text-align: center;
+}
+.app-figure figcaption {
+  margin-top: 1.1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  .device-frame { max-width: 260px; border-radius: 32px; }
+  .device-frame .device-screen { border-radius: 23px; }
+  .app-figure { max-width: 280px; }
+}
+
+/* ============================================
    SECTIONS
    ============================================ */
 .section {

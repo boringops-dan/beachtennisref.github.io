@@ -1,4 +1,4 @@
-// VolleyRef.App Main JavaScript
+// BeachTennisRef.App Main JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
   // Mobile Navigation Toggle

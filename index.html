@@ -178,12 +178,12 @@
   </script>
 
   <!-- Google tag (gtag.js). TODO: replace placeholder id with the beachtennisref GA4 property -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BEACHTENNIS0"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JELDXQYBLN"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-BEACHTENNIS0');
+    gtag('config', 'G-JELDXQYBLN');
   </script>
 </head>
 <body>
@@ -238,23 +238,12 @@
       </div>
     </div>
     <div class="hero-visual">
-      <!-- Themed scoreboard mockup placeholder until a real demo asset lands (see ASSETS.md) -->
-      <div class="hero-mockup" role="img" aria-label="Beach tennis live scoreboard preview" style="width:100%;max-width:580px;aspect-ratio:4/3;border-radius:20px;border:1px solid rgba(255,255,255,0.08);background:linear-gradient(150deg, rgba(212,162,74,0.18), rgba(10,10,15,0.6));display:flex;flex-direction:column;justify-content:center;gap:1rem;padding:2rem;box-sizing:border-box;">
-        <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--primary);">
-          <span>● Live</span><span>Set 1</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;font-size:1.35rem;font-weight:700;">
-          <span>Costa / Silva <span style="color:var(--primary);">●</span></span><span style="font-variant-numeric:tabular-nums;">40</span>
-        </div>
-        <div style="height:1px;background:rgba(255,255,255,0.08);"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;font-size:1.35rem;font-weight:700;opacity:0.85;">
-          <span>Rossi / Bruno</span><span style="font-variant-numeric:tabular-nums;">30</span>
-        </div>
-        <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
-          <div style="flex:1;text-align:center;padding:0.85rem;border-radius:12px;background:rgba(212,162,74,0.15);border:1px solid rgba(212,162,74,0.3);font-weight:700;">+ Point</div>
-          <div style="flex:1;text-align:center;padding:0.85rem;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-weight:700;">+ Point</div>
-        </div>
-      </div>
+      <!-- Real screenshot of the live scoring screen, framed as a phone -->
+      <picture class="device-frame device-frame--hero">
+        <source srcset="/images/screenshots/scoreboard.webp" type="image/webp">
+        <img src="/images/screenshots/scoreboard.png" class="device-screen" width="1000" height="1558"
+             alt="BeachTennisRef.App live scoring screen: RIVERA / COLE leading PARK / TORRES with the serving player, court diagram, and point buttons">
+      </picture>
     </div>
   </section>
 
