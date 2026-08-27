@@ -19,6 +19,11 @@ Static marketing site for [BeachTennisRef.App](https://beachtennisref.app) -- a 
 - **Volleyball sibling site:** `../volleyref.github.io` -- mirror its page structure, components, and SEO patterns; rebrand copy/keywords for beach tennis.
 - **Competitive position:** beach tennis scoring/referee keywords are near-uncontested (see the competitive audit) -- this site's job is to own them.
 
+## App Store Connect sync
+
+- `terms.txt` is a plain-text mirror of `terms.html`'s legal-prose content (headers as bare lines, blank-line-separated paragraphs, no markup). It's the copy-paste source for the app's Custom License Agreement field in App Store Connect (App Information > License Agreement > Edit), which only accepts plain text.
+- Whenever `terms.html` changes, update `terms.txt` to match in the same commit, then paste the new `terms.txt` into App Store Connect. See `../volleyref.github.io/CLAUDE.md` for the incident that made this necessary.
+
 ## Conventions
 
 - Never use em dashes in copy or code.
