@@ -1794,7 +1794,7 @@ body .footer a:hover { color: var(--accent); }
 .bth-pill-btn { display: inline-block; background: var(--bg); color: var(--text); padding: 18px 38px; border-radius: var(--radius-pill); font-weight: 700; font-size: 18px; text-decoration: none; }
 .bth-microcopy { font-size: 14px; color: var(--cream-warm); }
 
-.bth-hero { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--bg-elevated) 0%, #7A2E63 38%, var(--primary) 68%, #FFA24B 88%, #FFD07A 100%); }
+.bth-hero { position: relative; overflow: hidden; background: linear-gradient(180deg, #2B1B4D 0%, #7A2E63 38%, #E85D50 68%, #FFA24B 88%, #FFD07A 100%); }
 .bth-hero-sun { position: absolute; bottom: 110px; left: 50%; margin-left: -140px; width: 280px; height: 280px; border-radius: 50%; background: var(--accent-light); opacity: 0.9; }
 .bth-hero-sand { position: absolute; bottom: 0; left: 0; width: 100%; height: 100px; background: var(--bg); }
 .bth-hero-court { position: absolute; bottom: 70px; left: 8%; width: 84%; height: 140px; }
@@ -1865,6 +1865,10 @@ body .footer a:hover { color: var(--accent); }
 .bth-price-head-row { display: flex; align-items: center; justify-content: space-between; }
 
 .bth-faq-wrap { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+.bth-faq-list { display: flex; flex-direction: column; gap: 14px; }
+.bth-faq-item { background: var(--bg-elevated); border: 1px solid #3C2865; border-radius: 14px; padding: 22px 26px; }
+.bth-faq-q { font-size: 17px; font-weight: 700; margin: 0; }
+.bth-faq-a { font-size: 15px; line-height: 1.55; color: var(--text-secondary); margin: 10px 0 0 0; }
 
 .bth-final { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--bg-elevated) 0%, #7A2E63 45%, var(--primary) 80%, #FFA24B 100%); padding: 120px 64px; }
 .bth-final-sun { position: absolute; bottom: -140px; left: 50%; margin-left: -160px; width: 320px; height: 320px; border-radius: 50%; background: var(--accent-light); opacity: 0.8; }
@@ -1944,3 +1948,44 @@ body .footer a:hover { color: var(--accent); }
   .bth-node-you { width: 160px; padding: 12px 14px; }
 }
 /* ==================== END BTH HOMEPAGE 2026 ==================== */
+
+/* ==================== BTT TEMPLATES 2026 ==================== */
+body .section-label {
+  display: inline-flex; align-items: center;
+  background: none; border: none; border-radius: 0; padding: 0;
+  font-weight: 700; font-size: 14px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--primary-light);
+}
+body .breadcrumb { font-weight: 600; font-size: 13px; color: var(--text-secondary); }
+body .breadcrumb a { color: var(--text-secondary); }
+body .breadcrumb a:hover { color: var(--accent); }
+body .feature-card, body .problem-card, body .benefit-card {
+  background: var(--bg-elevated); border: 1px solid #3C2865;
+  border-radius: var(--radius-lg); box-shadow: none;
+}
+body .faq-item { background: var(--bg-elevated); border: 1px solid #3C2865; border-radius: 14px; }
+body .comparison-table { border: 1px solid #3C2865; border-radius: var(--radius-md); background: var(--bg-elevated); }
+body .comparison-table th { background: #1A0F2B; color: var(--text); font-weight: 700; letter-spacing: 0.04em; }
+body .comparison-table td { border-color: #3C2865; }
+body .cta-section {
+  background: linear-gradient(180deg, #7A2E63 0%, #E85D50 70%, #FFA24B 100%);
+}
+body .cta-section h2, body .cta-section p { color: #FFF7EC; }
+body .cta-section .btn-primary { background: var(--bg); color: var(--text); }
+body .hero-pill { border: 1px solid rgba(255, 247, 236, 0.4); border-radius: var(--radius-pill); background: transparent; font-weight: 700; letter-spacing: 0.06em; color: #FFE9D0; }
+body .hero-v7 {
+  background: linear-gradient(160deg, #2B1B4D 0%, #7A2E63 70%, #A84462 100%);
+  color: var(--text);
+}
+body .hero-subline, body .hero-description { color: #FFE9D0; }
+body .hero-microcopy { color: #FFE9D0; }
+body .prose { font-size: 17px; line-height: 1.75; color: #E4D6EA; }
+body .btt-quick-answer {
+  background: var(--bg-elevated); border: 2px solid var(--accent);
+  border-radius: var(--radius-lg); box-shadow: none;
+}
+body .btt-quick-answer-label {
+  font-weight: 800; font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+}
+/* ==================== END BTT TEMPLATES 2026 ==================== */
