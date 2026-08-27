@@ -119,59 +119,33 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Is BeachTennisRef.App really free to start?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Your first matches are free with all features included and no credit card required. After that, pick a weekly, monthly, or yearly plan that fits your season."
-        }
+        "name": "Which scoring formats does it support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Advantage and no-ad (deciding point) scoring, regular tie-breaks, and match tie-breaks. Pick the format at match setup and the app handles it." }
       },
       {
         "@type": "Question",
-        "name": "Does BeachTennisRef.App enforce ITF beach tennis rules?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. It enforces ITF beach tennis rules including correct serve rotation per set, tie-break serving (Rule 8b), no-advantage scoring, ends changes, and let/hindrance handling. It is not a generic tennis app with a beach mode."
-        }
+        "name": "Does it handle the tie-break serve order?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app tracks who serves and from which side through the whole tie-break, including the change of ends inside it." }
       },
       {
         "@type": "Question",
-        "name": "Do I need to install BeachTennisRef.App?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. It is a web app that works in any modern browser on any device. phone, tablet, or laptop. No app store download required, and it works on both iPhone and Android. Add it to your home screen for one-tap access."
-        }
+        "name": "Singles and doubles?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Both. Score 1v1 or 2v2; the app knows who serves next either way." }
       },
       {
         "@type": "Question",
-        "name": "Does it work offline on the beach?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. BeachTennisRef.App stores match data locally and works without cell signal or WiFi, then syncs when you reconnect. Courts with poor reception are fully supported."
-        }
+        "name": "What happens when I lose signal on the beach?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Nothing. Every point is stored on your device and syncs when you're back online." }
       },
       {
         "@type": "Question",
-        "name": "Can spectators follow the score live?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Generate a shareable link and anyone can follow the live score on their own phone. current serve, set scores, and match status. No app install on their end."
-        }
+        "name": "Can I fix a wrong score mid-match?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Undo anything and correct any score; the full point-by-point history stays intact." }
       },
       {
         "@type": "Question",
-        "name": "Does it support singles and doubles?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Both. The app applies the correct serve order and rules for singles and doubles, and shows player names on the scoreboard."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I undo a mistake mid-match?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Every action. points, serve changes, first-server selection, let calls. can be undone with a single tap. No restarting the game."
-        }
+        "name": "Can I cancel any time?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Manage or cancel the subscription any time; you keep access until the period ends." }
       }
     ]
   }
@@ -210,339 +184,294 @@
   </nav>
 
   <main id="main-content">
-  <!-- 1. Hero -->
-  <section class="hero-v7 hero-home" data-section="hero">
-    <div class="hero-text">
-      <h1 class="mega-headline">
-        <span class="line line-1">The Beach Tennis</span>
-        <span class="line line-accent">Scoring App.</span>
-      </h1>
-      <p class="hero-subline">
-        Whose serve is it? It knows.<br>
-        Tie-break rotation? Handled.<br>
-        Time to change ends? It tells you.<br>
-        Wrong tap? Undo.
-      </p>
-      <div class="hero-pills">
-        <span class="hero-pill">ITF Rules</span>
-        <span class="hero-pill">Works on Any Device</span>
-        <span class="hero-pill">Live Scoreboard Link</span>
-        <span class="hero-pill">Offline &amp; Full Undo</span>
+  <!-- HERO -->
+  <header class="bth-hero">
+    <div class="bth-hero-sun"></div>
+    <div class="bth-hero-sand"></div>
+    <svg class="bth-hero-court" viewBox="0 0 1200 140" fill="none" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="130" x2="1200" y2="130" stroke="#1E1230" stroke-width="5"></line><line x1="600" y1="130" x2="600" y2="20" stroke="#1E1230" stroke-width="5"></line><line x1="560" y1="20" x2="640" y2="20" stroke="#1E1230" stroke-width="5"></line></svg>
+    <div class="bth-hero-inner">
+      <div class="bth-hero-badge">The only app built for ITF beach tennis</div>
+      <h1 class="bth-hero-h1">Play until<br>the light goes.</h1>
+      <p class="bth-hero-sub">The score keeps itself. Serve order, sides, tie-breaks, change of ends, handled every point.</p>
+      <div class="bth-hero-cta-col">
+        <a href="https://app.beachtennisref.app" class="bth-pill-btn" data-cta="hero">Start Scoring Free</a>
+        <div class="bth-microcopy">Your first matches are free. No credit card required.</div>
       </div>
-      <div class="hero-description">
-        <div class="hero-buttons">
-          <a href="https://app.beachtennisref.app" class="btn btn-primary btn-large" data-cta="hero">Start Scoring Free</a>
-          <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
-        </div>
-        <p class="hero-microcopy">Start scoring in under a minute.</p>
+      <div class="bth-trust">
+        <div>ITF RULES</div>
+        <div class="bth-trust-dot"></div>
+        <div>SINGLES &amp; DOUBLES</div>
+        <div class="bth-trust-dot"></div>
+        <div>WORKS OFFLINE</div>
       </div>
     </div>
-    <div class="hero-visual">
-      <!-- Real screenshot of the live scoring screen, framed as a phone -->
-      <picture class="device-frame device-frame--hero">
-        <source srcset="/images/screenshots/scoreboard.webp" type="image/webp">
-        <img src="/images/screenshots/scoreboard.png" class="device-screen" width="1000" height="1558"
-             alt="BeachTennisRef.App live scoring screen: RIVERA / COLE leading PARK / TORRES with the serving player, court diagram, and point buttons">
-      </picture>
-    </div>
-  </section>
+  </header>
 
-  <!-- 2. Trust Bar -->
-  <section class="trust-bar" data-section="trust" aria-label="Why players and referees trust BeachTennisRef.App">
-    <div class="container">
-      <div class="trust-item">
-        <div class="trust-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <strong>ITF Rules Built In</strong>
-        <span>Enforced, not just tracked</span>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-        <strong>Web App</strong>
-        <span>iPhone, Android, any device. No install.</span>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
-        <strong>Works Offline</strong>
-        <span>Built for beach courts with no signal</span>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <strong>Free to Start</strong>
-        <span>No credit card, no catch</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Problem -->
-  <section class="section" data-section="problem" id="why-beachtennisref">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">The Problem</span>
-        <h2>Beach Tennis Scoring Is Fiddly.</h2>
-        <p>The serve rotation, the tie-break, the ends changes. easy to lose track between rallies in the sun.</p>
-      </div>
-      <div class="problem-grid">
-        <div class="problem-card">
-          <div class="problem-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg></div>
-          <h3>"Whose serve is it?"</h3>
-          <p>Serve order changes by set, and the tie-break has its own rotation. Lose the thread for one point and the whole game is in dispute.</p>
+  <!-- THE COUNTING PROBLEM -->
+  <section class="bth-section">
+    <div class="bth-inner">
+      <div class="bth-eyebrow">Sound familiar?</div>
+      <h2 class="bth-h2">Somebody always has to count. It ruins their game.</h2>
+      <div class="bth-card-grid-4">
+        <div class="bth-problem-card">
+          <div class="bth-problem-num">5-4</div>
+          <div class="bth-card-body">"Wait, whose serve is it?" The argument every doubles pair knows by heart.</div>
         </div>
-        <div class="problem-card">
-          <div class="problem-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
-          <h3>Tie-Break &amp; Ends Changes</h3>
-          <p>No-advantage scoring, the match tie-break, changing ends at the right interval. Generic tennis apps get the beach tennis nuances wrong.</p>
+        <div class="bth-problem-card">
+          <div class="bth-problem-num">6-6</div>
+          <div class="bth-card-body">The tie-break rotation everyone forgets. One serve, then two, then somebody guesses.</div>
         </div>
-        <div class="problem-card">
-          <div class="problem-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><path d="M6.71 6.71C4.46 8 3 10.32 3 13a9 9 0 0 0 9 9c2.68 0 5-1.46 6.29-3.71"/></svg></div>
-          <h3>Counting in Your Head</h3>
-          <p>You came to play, not to be a human scoreboard. And there's nowhere to share the score with whoever's watching from the sand.</p>
+        <div class="bth-problem-card">
+          <div class="bth-problem-num">Ends?</div>
+          <div class="bth-card-body">Three games in and nobody remembers if you already changed sides. The sun does.</div>
+        </div>
+        <div class="bth-problem-card">
+          <div class="bth-problem-num">40-40</div>
+          <div class="bth-card-body">"Was that ad-in or deciding point?" Depends who you ask. It shouldn't.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 4. Features -->
-  <section id="features" class="section" data-section="features" style="background: var(--bg-elevated);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">Features</span>
-        <h2>The Rules Are Handled. Just Play.</h2>
-        <p>Serve rotation, tie-breaks, ends changes, lets. enforced automatically. You stop counting and start playing.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
-          <h3>ITF Rules Enforced Automatically</h3>
-          <p>Serve rotation per set, no-advantage scoring, the match tie-break, ends changes. It is a beach tennis app, not a tennis app with a beach mode. The rules are built in.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg></div>
-          <h3>Tie-Break Serving (Rule 8b)</h3>
-          <p>The tie-break serve alternates on its own schedule. The app tracks exactly who serves each point so you never have to argue it mid-breaker.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
-          <h3>Court &amp; Serve Tracking</h3>
-          <p>Always know who serves, which side each pair is on, and when ends change. The court view shows the serving player and prompts the change of ends.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17v-6h-6"/><path d="M7 13a7 7 0 0 0 12 2"/><path d="M17 11a7 7 0 0 0-12-2"/></svg></div>
-          <h3>Full Undo</h3>
-          <p>Wrong tap on a point, a let, the first server? Undo instantly. Every action is reversible. No restarting the game, no panic.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
-          <h3>Works Offline</h3>
-          <p>Score a full match with no signal or WiFi. The app saves everything locally and syncs when you reconnect. Made for the beach, not just the clubhouse.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg></div>
-          <h3>Live Scoreboard Sharing</h3>
-          <p>Share a live link. Friends on the sand and fans at home follow every point in real time. current serve, set scores, match status. No app install for them.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-          <h3>Singles &amp; Doubles</h3>
-          <p>Correct serve order and rules for both formats. Player names show on the scoreboard, so spectators always know who they are watching.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2z"/></svg></div>
-          <h3>Built for the Court</h3>
-          <p>Big buttons, clear layout, one-handed scoring in bright sun. Fast and clean, with no hunting through menus between points.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-          <h3>Match History</h3>
-          <p>Every match is saved automatically. Review past matches, share results, and keep a record of the whole tournament or season.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. How It Works -->
-  <section id="how-it-works" class="section" data-section="how-it-works">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">How It Works</span>
-        <h2>Set Up. Serve. Score.</h2>
-        <p>Three steps from first serve to final point.</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-content">
-            <div class="step-number" aria-hidden="true">1</div>
-            <h3>Set Up Your Match</h3>
-            <p>Enter the players or pairs, pick singles or doubles, and choose the format. ITF defaults are ready to go, so you are scoring in under a minute.</p>
+  <!-- RULES HANDLED -->
+  <section class="bth-section bth-rules" id="features">
+    <div class="bth-inner">
+      <div class="bth-split">
+        <div class="bth-split-copy">
+          <div class="bth-eyebrow">Rules handled, not just tracked</div>
+          <h2 class="bth-h2">Scoreboard apps count taps. Beach Tennis Ref knows the rulebook.</h2>
+          <p class="bth-lead">Who serves, from which side, when you switch ends, and what happens at 6-6. Advantage or deciding point, regular or match tie-break. You tap the winner of the rally; the ITF rules do the rest.</p>
+          <div class="bth-chip-row">
+            <div class="bth-chip">Serve order</div>
+            <div class="bth-chip">Serving side</div>
+            <div class="bth-chip">Tie-breaks</div>
+            <div class="bth-chip">Change of ends</div>
           </div>
         </div>
-        <div class="step">
-          <div class="step-content">
-            <div class="step-number" aria-hidden="true">2</div>
-            <h3>Pick the First Server</h3>
-            <p>Tap who serves first. From there the app handles serve rotation, the tie-break order, and ends changes automatically.</p>
+        <div class="bth-scorecard">
+          <div class="bth-scorecard-head">
+            <div class="bth-scorecard-label">MATCH TIE-BREAK</div>
+            <div class="bth-scorecard-set">SET 3</div>
           </div>
-        </div>
-        <div class="step">
-          <div class="step-content">
-            <div class="step-number" aria-hidden="true">3</div>
-            <h3>Score the Match</h3>
-            <p>Tap to score each point. Serve, sets, tie-breaks, and ends changes are tracked for you. Share a live link, and review the full match afterward.</p>
+          <div class="bth-scorecard-body">
+            <div class="bth-team-row">
+              <div class="bth-team-name">Ana &amp; Marta</div>
+              <div class="bth-team-score"><span class="bth-sets-note">6 &middot; 4</span><span class="bth-points">6</span></div>
+            </div>
+            <div class="bth-team-row bth-team-row-serving">
+              <div class="bth-team-name"><span class="bth-serve-dot"></span>Luca &amp; Rafa</div>
+              <div class="bth-team-score"><span class="bth-sets-note">4 &middot; 6</span><span class="bth-points">5</span></div>
+            </div>
+            <div class="bth-status-row">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="#FFC070" stroke-width="1.8"></circle><path d="M9 5 L 9 9 L 12 11" stroke="#FFC070" stroke-width="1.8" stroke-linecap="round"></path></svg>
+              <span>Rafa serves next, left side</span>
+            </div>
+            <div class="bth-status-row bth-status-row-highlight">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6 L 15 6 M 15 6 L 11.5 2.5 M 15 6 L 11.5 9.5" stroke="#1E1230" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15 12 L 3 12 M 3 12 L 6.5 8.5 M 3 12 L 6.5 15.5 M 3 12 L 6.5 15.5" stroke="#1E1230" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <span>Change of ends after the next point</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. Built For -->
-  <section class="section" data-section="built-for" id="built-for" style="background: var(--bg-elevated);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">Built For</span>
-        <h2>Built for Everyone on the Sand</h2>
+  <!-- EVERY CALL COVERED -->
+  <section class="bth-section bth-calls">
+    <div class="bth-inner">
+      <div class="bth-calls-head">
+        <div>
+          <div class="bth-eyebrow">Every call covered</div>
+          <h2 class="bth-h2">Good enough for a sanctioned final. Easy enough for Saturday doubles.</h2>
+        </div>
+        <p class="bth-calls-sub">Every call is one tap. Every tap can be undone. The full point-by-point history is always there.</p>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3><a href="/beach-tennis-scoring-app.html">Referees &amp; Umpires</a></h3>
-          <p>Official ITF rule application, a reliable score record, and a clean shareable result. The rules are enforced so you can focus on the match.</p>
-          <a class="text-link" href="/beach-tennis-scoring-app.html">See the app &rarr;</a>
+      <div class="bth-card-grid-3">
+        <div class="bth-call-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 L 12 21 M 5 8 C 8 10, 16 10, 19 8" stroke="#FFC070" stroke-width="2" stroke-linecap="round"></path></svg>Lets, replayed properly</div>
+        <div class="bth-call-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4 L 20 18 L 4 18 Z" stroke="#FFC070" stroke-width="2" stroke-linejoin="round"></path><path d="M12 10 L 12 13.5" stroke="#FFC070" stroke-width="2" stroke-linecap="round"></path><circle cx="12" cy="16" r="0.8" fill="#FFC070"></circle></svg>Hindrance calls</div>
+        <div class="bth-call-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4 L 6 20 M 6 5 L 17 5 L 14.5 8.5 L 17 12 L 6 12" stroke="#FFC070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Forfeits and retirements</div>
+        <div class="bth-call-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10 L 9 5 M 4 10 L 9 15 M 4 10 L 15 10 C 18 10, 20 12, 20 15 C 20 18, 18 20, 15 20 L 10 20" stroke="#FFC070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Undo anything</div>
+        <div class="bth-call-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5 L 19 5 M 5 10 L 19 10 M 5 15 L 13 15 M 5 20 L 10 20" stroke="#FFC070" stroke-width="2" stroke-linecap="round"></path></svg>Point-by-point history</div>
+        <div class="bth-call-chip"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 5 L 19 10 L 9 20 L 4 20 L 4 15 Z" stroke="#FFC070" stroke-width="2" stroke-linejoin="round"></path></svg>Score corrections</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE LIVE STORY -->
+  <section class="bth-section" id="how-it-works">
+    <div class="bth-inner">
+      <div class="bth-story-head">
+        <div class="bth-eyebrow">The live story</div>
+        <h2 class="bth-h2">One match. Every phone on the beach. Even with the signal gone.</h2>
+      </div>
+      <div class="bth-story-stage" data-step="1" aria-label="How phones join one live match, step by step">
+        <svg class="bth-story-links" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
+          <g class="bth-linkset" data-on="2">
+            <path id="bt-link-you" class="bth-link" pathLength="1" d="M300 250 L470 100"></path>
+            <circle class="bth-port" cx="300" cy="250" r="4"></circle>
+            <circle class="bth-port" cx="470" cy="100" r="4"></circle>
+          </g>
+          <g class="bth-linkset" data-on="3">
+            <path id="bt-link-court" class="bth-link" pathLength="1" d="M545 95 L800 170"></path>
+            <circle class="bth-port" cx="545" cy="95" r="4"></circle>
+            <circle class="bth-port" cx="800" cy="170" r="4"></circle>
+          </g>
+          <g class="bth-linkset" data-on="4">
+            <path id="bt-link-home" class="bth-link" pathLength="1" d="M465 75 L215 80"></path>
+            <circle class="bth-port" cx="465" cy="75" r="4"></circle>
+            <circle class="bth-port" cx="215" cy="80" r="4"></circle>
+          </g>
+          <g class="bth-linkset" data-on="4">
+            <path id="bt-link-desk" class="bth-link" pathLength="1" d="M550 115 L780 400"></path>
+            <circle class="bth-port" cx="550" cy="115" r="4"></circle>
+            <circle class="bth-port" cx="780" cy="400" r="4"></circle>
+          </g>
+          <path id="bt-ring" class="bth-ring" d="M180 300 a110 110 0 1 0 220 0 a110 110 0 1 0 -220 0"></path>
+          <circle class="bth-pulse bth-pulse-cloud is-on" r="6"><animateMotion dur="1.5s" begin="0s" repeatCount="indefinite"><mpath href="#bt-link-you"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-cloud is-on" r="6"><animateMotion dur="1.5s" begin="0.4s" repeatCount="indefinite"><mpath href="#bt-link-court"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-cloud is-on" r="6"><animateMotion dur="1.4s" begin="0.7s" repeatCount="indefinite"><mpath href="#bt-link-home"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-cloud is-on" r="6"><animateMotion dur="1.6s" begin="1.0s" repeatCount="indefinite"><mpath href="#bt-link-desk"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-local" r="6"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite"><mpath href="#bt-ring"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-local" r="6"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#bt-ring"></mpath></animateMotion></circle>
+        </svg>
+        <div class="bth-node bth-node-you" data-on="1">
+          <span class="bth-node-label" style="color: var(--accent);">YOU &middot; ON COURT</span>
+          <span class="bth-node-scorechip" data-youscore>0 - 0</span>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></div>
-          <h3><a href="/best-beach-tennis-apps.html">Tournament Organizers</a></h3>
-          <p>Run multiple courts, each scored on its own device, with live scores spectators can follow from the sand. No fixed scoring stations, no hardware.</p>
-          <a class="text-link" href="/best-beach-tennis-apps.html">Compare the options &rarr;</a>
+        <div class="bth-node bth-node-cloud" data-on="2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19a4.5 4.5 0 0 0 .4-9A6 6 0 0 0 6.2 8.5 4.5 4.5 0 0 0 6.5 19z"></path></svg>
+          <span class="bth-node-label">CLOUD SYNC</span>
+          <span class="bth-node-down-tag">OFFLINE</span>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3><a href="/how-to-keep-score-beach-tennis.html">Players &amp; Clubs</a></h3>
-          <p>Keep score without paper at club nights and pickup games. Fast enough to use between rallies, forgiving enough to undo any mistake.</p>
-          <a class="text-link" href="/how-to-keep-score-beach-tennis.html">How to keep score &rarr;</a>
+        <div class="bth-node bth-node-court" data-on="3">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M10.5 19h3"></path></svg>
+          <span class="bth-node-label">COURTSIDE</span>
+          <span class="bth-node-sub" data-watchers>+8 watching</span>
+          <span class="bth-node-down-tag bth-tag-wait">WAITING</span>
+        </div>
+        <div class="bth-node bth-node-home" data-on="4">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M10.5 19h3"></path></svg>
+          <span class="bth-node-label">BACK HOME</span>
+          <span class="bth-node-down-tag">NO FEED</span>
+        </div>
+        <div class="bth-node bth-node-desk" data-on="4">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"></rect><path d="M10 18.5h4"></path></svg>
+          <span class="bth-node-label">TOURNAMENT DESK</span>
+          <span class="bth-node-scorechip" data-deskscore>5 - 3</span>
+          <span class="bth-node-down-tag bth-tag-wait">WAITING</span>
+        </div>
+        <div class="bth-story-stamp bth-stamp-offline"><strong>STILL WORKS.</strong><span class="bth-story-stamp-sub">Scoring doesn't need the internet. Every point saved on your phone.</span></div>
+        <div class="bth-story-stamp bth-stamp-resync"><strong>ALL CAUGHT UP.</strong><span class="bth-story-stamp-sub">Everything synced the moment signal returned.</span></div>
+        <div class="bth-story-caption" aria-live="polite">
+          <span class="bth-story-caption-time" data-caption-time>6:48 PM</span>
+          <span data-caption-text>Golden hour. You tap the first point of the club final.</span>
+        </div>
+      </div>
+      <div class="bth-story-rail" role="list">
+        <button class="bth-story-step" type="button" data-step-btn="1"><span class="bth-story-step-num">1</span><span class="bth-story-step-title">You score</span><span class="bth-story-step-sub">One phone. That's all it takes.</span></button>
+        <button class="bth-story-step" type="button" data-step-btn="2"><span class="bth-story-step-num">2</span><span class="bth-story-step-title">Cloud backs you up</span><span class="bth-story-step-sub">Every point saved live.</span></button>
+        <button class="bth-story-step" type="button" data-step-btn="3"><span class="bth-story-step-num">3</span><span class="bth-story-step-title">The court joins</span><span class="bth-story-step-sub">One QR scan at the net post.</span></button>
+        <button class="bth-story-step" type="button" data-step-btn="4"><span class="bth-story-step-num">4</span><span class="bth-story-step-title">Everyone joins</span><span class="bth-story-step-sub">The desk, and family back home.</span></button>
+        <button class="bth-story-step" type="button" data-step-btn="5"><span class="bth-story-step-num">5</span><span class="bth-story-step-title">The signal drops</span><span class="bth-story-step-sub">You keep scoring. Nothing is lost.</span></button>
+        <button class="bth-story-step" type="button" data-step-btn="6"><span class="bth-story-step-num">6</span><span class="bth-story-step-title">Back online</span><span class="bth-story-step-sub">Everything resyncs at once.</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANY DEVICE -->
+  <section class="bth-section">
+    <div class="bth-inner">
+      <div class="bth-devices-inner">
+        <div>
+          <div class="bth-eyebrow" style="color: var(--accent);">Any device</div>
+          <h2 class="bth-h2">Runs in the browser. No install required.</h2>
+        </div>
+        <p class="bth-devices-sub">Phone, tablet, laptop: open the page and score. There are App Store and Play Store versions anyway, for people who like icons.</p>
+        <div class="bth-device-row">
+          <div class="bth-device bth-device-phone">Phone</div>
+          <div class="bth-device bth-device-tablet">Tablet</div>
+          <div class="bth-device bth-device-laptop">Laptop</div>
+        </div>
+        <div class="bth-store-row">
+          <a class="bth-store-badge" href="https://app.beachtennisref.app" data-cta="devices-appstore">App Store</a>
+          <a class="bth-store-badge" href="https://app.beachtennisref.app" data-cta="devices-playstore">Google Play</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 7. Pricing -->
-  <section id="pricing" class="section" data-section="pricing">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">Pricing</span>
-        <h2>Simple Plans. No Surprises.</h2>
-        <p>Every plan includes every feature. Pick the one that fits your season.</p>
+  <!-- PRICING -->
+  <section class="bth-section bth-pricing" id="pricing">
+    <div class="bth-inner">
+      <div class="bth-pricing-head">
+        <div class="bth-eyebrow">Pricing</div>
+        <h2 class="bth-h2">Simple plans. Every plan has every feature.</h2>
       </div>
-      <div class="free-tier-banner">
-        <span>Your first matches are free. <strong>all features, no credit card</strong>. Just open and score.</span>
-        <a href="https://app.beachtennisref.app" class="btn btn-secondary btn-small" data-cta="pricing-free">Start Free</a>
-      </div>
-      <div class="pricing-bold">
-        <div class="price-card-bold" data-plan="weekly">
-          <div class="plan-persona">Best for: Single tournaments</div>
-          <h3>Weekly</h3>
-          <div class="price">$4.99</div>
-          <div class="period">per week</div>
-          <ul class="pricing-features" role="list">
-            <li>Unlimited matches</li>
-            <li>Live scoreboard sharing</li>
-            <li>Offline support</li>
-          </ul>
-          <a href="https://app.beachtennisref.app" class="btn btn-secondary" style="width:100%;" data-cta="pricing" data-plan="weekly">Start Free</a>
+      <div class="bth-price-grid">
+        <div class="bth-price-card">
+          <div class="bth-price-tier">Weekly</div>
+          <div class="bth-price-num">$4.99</div>
+          <div class="bth-price-note">For the tournament weekend.</div>
+          <a class="bth-price-btn" href="https://app.beachtennisref.app" data-cta="pricing-weekly">Choose Weekly</a>
         </div>
-        <div class="price-card-bold" data-plan="monthly">
-          <div class="plan-persona">Best for: League season</div>
-          <h3>Monthly</h3>
-          <div class="price">$14.99</div>
-          <div class="period">per month</div>
-          <ul class="pricing-features" role="list">
-            <li>Unlimited matches</li>
-            <li>Live scoreboard sharing</li>
-            <li>Offline support</li>
-          </ul>
-          <a href="https://app.beachtennisref.app" class="btn btn-secondary" style="width:100%;" data-cta="pricing" data-plan="monthly">Start Free</a>
+        <div class="bth-price-card bth-price-card-hi">
+          <div class="bth-price-head-row">
+            <div class="bth-price-tier">Yearly</div>
+            <div class="bth-price-flag">MOST POPULAR</div>
+          </div>
+          <div class="bth-price-num">$49.99</div>
+          <div class="bth-price-note">For the whole season on the sand.</div>
+          <a class="bth-price-btn-hi" href="https://app.beachtennisref.app" data-cta="pricing-yearly">Choose Yearly</a>
         </div>
-        <div class="price-card-bold featured" data-plan="yearly">
-          <div class="plan-savings">Best value</div>
-          <div class="plan-persona">Best for: Year-round play</div>
-          <h3>Yearly</h3>
-          <div class="price">$49.99</div>
-          <div class="period">per year</div>
-          <ul class="pricing-features" role="list">
-            <li>Unlimited matches</li>
-            <li>Live scoreboard sharing</li>
-            <li>Offline support</li>
-            <li>Best value</li>
-          </ul>
-          <a href="https://app.beachtennisref.app" class="btn btn-primary" style="width:100%;" data-cta="pricing" data-plan="yearly">Start Free</a>
+        <div class="bth-price-card">
+          <div class="bth-price-tier">Monthly</div>
+          <div class="bth-price-num">$14.99</div>
+          <div class="bth-price-note">For the club ladder months.</div>
+          <a class="bth-price-btn" href="https://app.beachtennisref.app" data-cta="pricing-monthly">Choose Monthly</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 8. FAQ -->
-  <section id="faq" class="section" data-section="faq" style="background: var(--bg-elevated);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">FAQ</span>
-        <h2>Questions? Answered.</h2>
-      </div>
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Is it really free to start?</button>
-          <div class="faq-answer" role="region">
-            <p>Yes. Your first matches are free with all features and no credit card. After that, pick a plan that fits your season.</p>
-          </div>
+  <!-- FAQ -->
+  <section class="bth-section" id="faq">
+    <div class="bth-faq-wrap">
+      <h2 class="bth-h2" style="text-align: center;">Questions? Answered.</h2>
+      <div class="bth-faq-list">
+        <div class="bth-faq-item">
+          <p class="bth-faq-q">Which scoring formats does it support?</p>
+          <p class="bth-faq-a">Advantage and no-ad (deciding point) scoring, regular tie-breaks, and match tie-breaks. Pick the format at match setup and the app handles it.</p>
         </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Does it enforce ITF beach tennis rules?</button>
-          <div class="faq-answer" role="region">
-            <p>Yes. Serve rotation per set, tie-break serving (Rule 8b), no-advantage scoring, ends changes, and let/hindrance handling. It is built for beach tennis, not a generic tennis app with a beach mode.</p>
-          </div>
+        <div class="bth-faq-item">
+          <p class="bth-faq-q">Does it handle the tie-break serve order?</p>
+          <p class="bth-faq-a">Yes. The app tracks who serves and from which side through the whole tie-break, including the change of ends inside it.</p>
         </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Do I need to install anything?</button>
-          <div class="faq-answer" role="region">
-            <p>No. It is a web app. Open it in any browser on iPhone, Android, tablet, or laptop. Add it to your home screen for one-tap access.</p>
-          </div>
+        <div class="bth-faq-item">
+          <p class="bth-faq-q">Singles and doubles?</p>
+          <p class="bth-faq-a">Both. Score 1v1 or 2v2; the app knows who serves next either way.</p>
         </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Does it work offline on the beach?</button>
-          <div class="faq-answer" role="region">
-            <p>Yes. Match data is stored locally and the app works with no signal or WiFi, then syncs when you reconnect.</p>
-          </div>
+        <div class="bth-faq-item">
+          <p class="bth-faq-q">What happens when I lose signal on the beach?</p>
+          <p class="bth-faq-a">Nothing. Every point is stored on your device and syncs when you're back online.</p>
         </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Can spectators follow the score live?</button>
-          <div class="faq-answer" role="region">
-            <p>Yes. Share a link and anyone can follow the live score on their own phone. no app install needed on their end.</p>
-          </div>
+        <div class="bth-faq-item">
+          <p class="bth-faq-q">Can I fix a wrong score mid-match?</p>
+          <p class="bth-faq-a">Yes. Undo anything and correct any score; the full point-by-point history stays intact.</p>
         </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Singles or doubles?</button>
-          <div class="faq-answer" role="region">
-            <p>Both. The app applies the correct serve order and rules for each, and shows player names on the scoreboard.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">Can I undo a mistake?</button>
-          <div class="faq-answer" role="region">
-            <p>Yes. Every action. points, serve changes, first-server selection, let calls. can be undone with one tap.</p>
-          </div>
+        <div class="bth-faq-item">
+          <p class="bth-faq-q">Can I cancel any time?</p>
+          <p class="bth-faq-a">Yes. Manage or cancel the subscription any time; you keep access until the period ends.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 9. Final CTA -->
-  <section class="section cta-section" data-section="final-cta">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Just Play. We'll Keep Score.</h2>
-        <p>Beach tennis scoring with ITF rules built in: serve rotation, tie-breaks, ends changes, lets, and a live shareable scoreboard.</p>
-        <div class="cta-buttons">
-          <a href="https://app.beachtennisref.app" class="btn btn-primary btn-large" data-cta="final-bottom">Start Scoring Free</a>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">First matches free. Any device. No install.</p>
-      </div>
+  <!-- FINAL CTA -->
+  <section class="bth-final">
+    <div class="bth-final-sun"></div>
+    <div class="bth-final-inner">
+      <h2 class="bth-final-h2">The sun is going down. The court is ready. The score is our job.</h2>
+      <a href="https://app.beachtennisref.app" class="bth-pill-btn" data-cta="final">Start Scoring Free</a>
     </div>
   </section>
   </main>
@@ -585,7 +514,7 @@
           <h4>Company</h4>
           <ul role="list">
             <li><a href="mailto:support@beachtennisref.app">Support</a></li>
-            <li><a href="https://volleyref.app">VolleyRef (volleyball)</a></li>
+            <li><a href="https://app.beachtennisref.app" data-cta="footer-app">Beach Tennis Ref App</a></li>
           </ul>
         </div>
         <div class="footer-links">
