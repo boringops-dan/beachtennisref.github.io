@@ -1,33 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap');
+
 /* VolleyRef.App - Bold Sport Design System */
 
 /* ============================================
    DESIGN TOKENS
    ============================================ */
 :root {
-  --primary: #d4a24a;
-  --primary-dark: #b8863a;
-  --primary-light: #e6bd6e;
-  --accent: #ef4444;
-  --accent-light: #f87171;
+  --primary: #E85D50;
+  --primary-dark: #D14A3E;
+  --primary-light: #FF8A4B;
+  --accent: #FFC070;
+  --accent-light: #FFDE9E;
   --success: #22c55e;
-  --warning: #eab308;
-  --rose: #f43f5e;
+  --warning: #FFC531;
+  --rose: #A84462;
 
-  --bg: #09090b;
-  --bg-warm: #0d0b0a;
-  --bg-elevated: rgba(255, 255, 255, 0.025);
+  --bg: #1E1230;
+  --bg-warm: #241539;
+  --bg-elevated: #2B1B4D;
 
-  --text: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-muted: #52525b;
+  --text: #FFF7EC;
+  --text-secondary: #C9B8D6;
+  --text-muted: #9C8BAC;
 
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-bg-hover: rgba(255, 255, 255, 0.07);
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --glass-border-hover: rgba(255, 255, 255, 0.14);
-  --glass-specular: rgba(255, 255, 255, 0.25);
-  --glass-blur: 40px;
-  --glass-saturate: 180%;
+  --glass-bg: #2B1B4D;
+  --glass-bg-hover: #322050;
+  --glass-border: #3C2865;
+  --glass-border-hover: #FFC070;
+  --glass-specular: rgba(255, 255, 255, 0);
+  --glass-blur: 0px;
+  --glass-saturate: 100%;
 
   --radius-xl: 24px;
   --radius-lg: 18px;
@@ -35,14 +37,18 @@
   --radius-sm: 8px;
   --radius-pill: 100px;
 
-  --gradient-primary: linear-gradient(135deg, #f97316, #ef4444);
-  --gradient-warm: linear-gradient(135deg, #f97316, #eab308);
+  --gradient-primary: linear-gradient(135deg, #E85D50, #FFA24B);
+  --gradient-warm: linear-gradient(135deg, #7A2E63, #E85D50);
 
-  --shadow-sm: 0 4px 16px rgba(0,0,0,0.3);
-  --shadow-md: 0 8px 32px rgba(0,0,0,0.35);
-  --shadow-lg: 0 20px 60px rgba(0,0,0,0.45);
-  --shadow-glow: 0 0 50px rgba(249,115,22,0.12), 0 0 100px rgba(239,68,68,0.06);
-  --shadow-glow-strong: 0 0 60px rgba(249,115,22,0.2), 0 0 120px rgba(239,68,68,0.1);
+  --shadow-sm: 0 4px 16px rgba(20, 10, 34, 0.4);
+  --shadow-md: 0 8px 32px rgba(20, 10, 34, 0.45);
+  --shadow-lg: 0 20px 60px rgba(20, 10, 34, 0.55);
+  --shadow-glow: 0 0 50px rgba(255, 138, 75, 0.12), 0 0 100px rgba(232, 93, 80, 0.06);
+  --shadow-glow-strong: 0 0 60px rgba(255, 138, 75, 0.2), 0 0 120px rgba(232, 93, 80, 0.1);
+
+  --font-display: 'Bricolage Grotesque', 'Avenir Next', 'Trebuchet MS', sans-serif;
+  --font-body: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --ink: #150C22;
 }
 
 /* Skip link for accessibility */
@@ -113,7 +119,7 @@ a { color: inherit; text-decoration: none; }
 img { max-width: 100%; height: auto; }
 
 /* ============================================
-   BACKGROUND - Warm Ambient Glow + Grain
+   BACKGROUND - Warm Ambient Glow
    ============================================ */
 body::before {
   content: '';
@@ -126,18 +132,6 @@ body::before {
     radial-gradient(ellipse 50% 35% at 10% 90%, rgba(234,179,8,0.05), transparent 70%);
   pointer-events: none;
   z-index: -1;
-}
-
-/* Subtle film grain for depth */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.025;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: overlay;
 }
 
 /* ============================================
@@ -1734,3 +1728,51 @@ p { color: var(--text-secondary); }
 .hero-visual video.hero-screenshot {
   cursor: zoom-in;
 }
+
+/* ============================================================
+   BT SUNSET 2026 OVERRIDES (appended layer, do not reorder)
+   Night-plum surfaces, dusk gradients, amber/coral accents,
+   Bricolage Grotesque display type. Cream is never a background.
+   ============================================================ */
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+}
+h1, h2, h3, .logo-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+body .navbar {
+  background: var(--bg);
+  color: var(--text);
+  border-bottom: 1px solid #322050;
+  backdrop-filter: none;
+}
+body .navbar a, body .navbar .logo-text { color: var(--text); }
+body .nav-links a { color: var(--text-secondary); }
+body .nav-links a:hover { color: var(--accent); }
+body .btn-primary {
+  background: #FFF7EC;
+  color: #7A2E63;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  box-shadow: none;
+}
+body .btn-primary:hover { background: #FFEEDD; color: #5E2350; }
+body .btn-outline {
+  background: transparent;
+  color: inherit;
+  border: 2px solid var(--text-secondary);
+  border-radius: var(--radius-pill);
+}
+body .footer {
+  background: var(--ink);
+  color: var(--text-secondary);
+}
+body .footer a { color: var(--text-secondary); }
+body .footer a:hover { color: var(--accent); }
+/* ==================== END BT SUNSET 2026 OVERRIDES ==================== */
