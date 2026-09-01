@@ -44,7 +44,7 @@
 - Consumes: nothing.
 - Produces: a known-green baseline all later tasks are diffed against.
 
-- [ ] **Step 1: Confirm clean tree and record branch**
+- [x] **Step 1: Confirm clean tree and record branch**
 
 Run: `git -C /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io status --porcelain`
 Expected: empty output. If not empty, STOP and report the dirty files; do not stash, do not discard.
@@ -52,12 +52,12 @@ Expected: empty output. If not empty, STOP and report the dirty files; do not st
 Run: `git -C /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io branch --show-current`
 Expected: prints a branch name. Stay on this branch for the whole plan.
 
-- [ ] **Step 2: Run the validator baseline**
+- [x] **Step 2: Run the validator baseline**
 
 Run: `cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io && npm run validate`
 Expected: exit code 0. If it fails, STOP and report the exact failure output. Do not fix pre-existing failures and do not start Task 2.
 
-- [ ] **Step 3: Snapshot the CSS selector inventory (used by the final gate)**
+- [x] **Step 3: Snapshot the CSS selector inventory (used by the final gate)**
 
 Run: `cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io && grep -oE '^[[:space:]]*[.#][a-zA-Z][a-zA-Z0-9_-]*' css/style.css | sed 's/^[[:space:]]*//' | sort -u > /tmp/bt-selectors-before.txt && wc -l /tmp/bt-selectors-before.txt`
 Expected: prints a line count (roughly 100-300). Keep `/tmp/bt-selectors-before.txt` for Task 9.
@@ -73,7 +73,7 @@ Expected: prints a line count (roughly 100-300). Keep `/tmp/bt-selectors-before.
 - Consumes: the existing `:root` custom properties (near the top of `css/style.css`).
 - Produces: Sunset Session token values and the `--font-*` variables; Task 3's homepage CSS assumes the fonts and tokens defined here exist.
 
-- [ ] **Step 1: Add the font imports as the FIRST line of `css/style.css`**
+- [x] **Step 1: Add the font imports as the FIRST line of `css/style.css`**
 
 Insert at the very top of the file, before everything else (an `@import` is only valid before other rules):
 
@@ -81,7 +81,7 @@ Insert at the very top of the file, before everything else (an `@import` is only
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap');
 ```
 
-- [ ] **Step 2: Replace the values inside the existing `:root` block**
+- [x] **Step 2: Replace the values inside the existing `:root` block**
 
 Find the `:root { ... }` block near the top of the file. Replace the VALUE of each variable listed below, keeping every variable name. Do not delete any variable, even ones not listed here. Add the three `--font-*` / `--ink` variables at the end of the block. (The radius variables keep their current values; they already match the mockup's rounded language.)
 
@@ -133,12 +133,12 @@ Find the `:root { ... }` block near the top of the file. Replace the VALUE of ea
 }
 ```
 
-- [ ] **Step 3: Remove the film-grain/noise overlay**
+- [x] **Step 3: Remove the film-grain/noise overlay**
 
 Run: `grep -n -i "grain\|noise" css/style.css`
 There is a "Subtle film grain" rule near line 131 (a `body::before`/`body::after`-style rule with an SVG feTurbulence background). Delete that whole rule and any companion rule that only exists to paint the grain overlay. Re-run the grep; expected: no rule painting a grain texture remains (comment lines mentioning the old background are fine to delete too).
 
-- [ ] **Step 4: Append the override layer at the very END of `css/style.css`**
+- [x] **Step 4: Append the override layer at the very END of `css/style.css`**
 
 Append exactly this block (keep the banner comments; Task 9 greps for them):
 
@@ -192,7 +192,7 @@ body .footer a:hover { color: var(--accent); }
 /* ==================== END BT SUNSET 2026 OVERRIDES ==================== */
 ```
 
-- [ ] **Step 5: Neutralize hard-coded old-theme colors outside the token block**
+- [x] **Step 5: Neutralize hard-coded old-theme colors outside the token block**
 
 Run: `grep -n "#09090b\|#0d0b0a\|#fafafa\|#a1a1aa\|#52525b" css/style.css`
 For every hit OUTSIDE the `:root` block, apply this table (values only; keep the selectors):
@@ -207,7 +207,7 @@ For every hit OUTSIDE the `:root` block, apply this table (values only; keep the
 
 If a hit sits inside a rule whose selector contains `navbar` or `footer`, leave it alone (the override layer already restyles those). Re-run the grep; expected: no output outside `:root` and navbar/footer rules.
 
-- [ ] **Step 6: Validate and commit**
+- [x] **Step 6: Validate and commit**
 
 Run: `cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io && npm run validate`
 Expected: exit 0. A failure here can only come from your CSS edit; fix your edit, never the validator.
@@ -233,7 +233,7 @@ Rules for this task:
 - Do NOT touch anything in `<head>` except the single FAQPage JSON-LD block in Step 3. Do NOT touch the GA4 snippet, the other JSON-LD blocks, the `<nav class="navbar">...</nav>` block, the `<footer class="footer">...</footer>` block, or any `<script>` tags at the end of `<body>`. Only the content between `</nav>` and the opening of the footer is replaced. (If the current body carries `mobile-cta` elements outside the nav/footer, they are part of the replaced content and go away.)
 - The visual target is `vbr-marketing/plans/assets/bt-homepage-canvas/Main.dc.html`. The markup below IS that mockup translated to classes plus responsive rules; when in doubt, the markup below wins.
 
-- [ ] **Step 1: Append the homepage CSS to `css/style.css`**
+- [x] **Step 1: Append the homepage CSS to `css/style.css`**
 
 Append after the Task 2 override block:
 
@@ -402,7 +402,7 @@ Append after the Task 2 override block:
 /* ==================== END BTH HOMEPAGE 2026 ==================== */
 ```
 
-- [ ] **Step 2: Replace the body content of `index.html`**
+- [x] **Step 2: Replace the body content of `index.html`**
 
 In `index.html`, delete everything between the closing `</nav>` tag and the opening `<footer` tag, and insert the following. Keep the nav, footer, head, and trailing scripts untouched.
 
@@ -699,7 +699,7 @@ In `index.html`, delete everything between the closing `</nav>` tag and the open
   </section>
 ```
 
-- [ ] **Step 3: Update the FAQPage structured data to match the new FAQ copy**
+- [x] **Step 3: Update the FAQPage structured data to match the new FAQ copy**
 
 This is a sanctioned exception to the "never touch `<head>`" rule, for exactly one block. In `index.html`'s head, find the `<script type="application/ld+json">` block whose JSON contains `"@type": "FAQPage"` (below the `<!-- Structured Data: FAQPage -->` comment, around line 114). Replace ONLY the JSON inside that one script tag with:
 
@@ -744,14 +744,14 @@ This is a sanctioned exception to the "never touch `<head>`" rule, for exactly o
 
 Touch nothing else in the head: not the other JSON-LD blocks, not titles, not meta descriptions.
 
-- [ ] **Step 4: Reconnect internal links the validator needs**
+- [x] **Step 4: Reconnect internal links the validator needs**
 
 The validator requires every page to be reachable from the homepage via internal links. The old body may have carried internal links beyond what the footer holds.
 
 Run: `cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io && npm run validate`
 If it reports unreachable pages, add each missing link as a plain `<a>` inside the existing footer link lists (do not restructure the footer; append items matching the footer's current item markup). Re-run until exit 0. If it reports anything OTHER than reachability or a problem in a file you edited, STOP and report.
 
-- [ ] **Step 5: Run the copy gates**
+- [x] **Step 5: Run the copy gates**
 
 ```bash
 cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io
@@ -761,7 +761,7 @@ grep -n "volleyref" index.html; echo "exit=$? (expect 1, meaning no match)"
 ```
 Expected: first prints `1` (hero microcopy only). Second: every hit is the exact phrase "Your first matches are free" with no number. Third: no match. If any differ, fix the body content.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add index.html css/style.css
@@ -782,7 +782,7 @@ git commit -m "Rebuild homepage with the Sunset Session dusk hero and night-plum
 
 Behavior contract (matches the volleyball stage's mechanics): 6 beats advanced on a reading-paced timer while the stage is in view (IntersectionObserver, threshold 0.35); rail buttons jump to a beat and pause auto-advance ~9s; beat 5 adds `is-offline` to the stage (cloud flickers OFFLINE, cloud pulses hide, local ring pulses show); beat 6 removes `is-offline` and adds `is-resync`; SMIL clock pauses when the stage is off-screen; `prefers-reduced-motion` shows beat 6 statically and never animates.
 
-- [ ] **Step 1: Create `js/story.js` with exactly this content**
+- [x] **Step 1: Create `js/story.js` with exactly this content**
 
 ```js
 // Live-story stage: phones join one live beach tennis match beat by beat.
@@ -915,7 +915,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 ```
 
-- [ ] **Step 2: Load it from `index.html`**
+- [x] **Step 2: Load it from `index.html`**
 
 In `index.html`, directly BEFORE the existing `<script src="js/main.js"` tag at the end of `<body>` (or before `</body>` if the script tags are ordered differently; do not reorder existing tags), add exactly:
 
@@ -925,7 +925,7 @@ In `index.html`, directly BEFORE the existing `<script src="js/main.js"` tag at 
 
 This is the only permitted change to the trailing scripts. Add it to `index.html` only, no other page.
 
-- [ ] **Step 3: Validate and commit**
+- [x] **Step 3: Validate and commit**
 
 Run: `cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io && npm run validate`
 Expected: exit 0.
@@ -946,7 +946,7 @@ git commit -m "Animate the live story: phones join the match, the signal drops, 
 - Consumes: Task 2's tokens.
 - Produces: interior pages fully on the new theme.
 
-- [ ] **Step 1: Find inline hard-coded old-theme colors in HTML files**
+- [x] **Step 1: Find inline hard-coded old-theme colors in HTML files**
 
 ```bash
 cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io
@@ -954,11 +954,11 @@ grep -rln 'style="[^"]*#09090b\|style="[^"]*#0d0b0a\|style="[^"]*#fafafa\|style=
 ```
 (The excluded directories are generated by `aeo`; Task 7 handles them at the generator. At plan-writing time this grep found nothing; it stays as a safety check.)
 
-- [ ] **Step 2: Replace per table**
+- [x] **Step 2: Replace per table**
 
 In each flagged file, inside `style="..."` attributes only, replace: `#09090b` with `var(--bg)`, `#0d0b0a` with `var(--bg-warm)`, `#fafafa` with `var(--text)`, `#a1a1aa` with `var(--text-secondary)`, `#d4a24a` with `var(--accent)`. Change nothing else in those files. Re-run the Step 1 grep; expected: no output.
 
-- [ ] **Step 3: Validate and commit**
+- [x] **Step 3: Validate and commit**
 
 Run: `npm run validate` — expected exit 0.
 
@@ -975,11 +975,11 @@ git commit -m "Retheme interior page inline styles to the new palette tokens"
 **Files:**
 - Modify: `sitemap.xml` (one `<lastmod>` value)
 
-- [ ] **Step 1: Update the homepage entry only**
+- [x] **Step 1: Update the homepage entry only**
 
 In `sitemap.xml`, find the `<url>` entry whose `<loc>` is `https://beachtennisref.app/` and set its `<lastmod>` to `2026-08-26`. Do not change any other entry (style-only changes do not get a lastmod bump).
 
-- [ ] **Step 2: Validate and commit**
+- [x] **Step 2: Validate and commit**
 
 Run: `npm run validate` — expected exit 0.
 
@@ -999,7 +999,7 @@ git commit -m "Bump homepage sitemap lastmod for the redesign"
 - Consumes: tokens from Task 2; the shared interior classes already emitted by every page family (`section-label`, `breadcrumb`, `feature-card`, `problem-card`, `benefit-card`, `faq-item`, `comparison-table`, `cta-section`, `hero-pill`, page heroes, `prose`).
 - Produces: the `btt-quick-answer` / `btt-quick-answer-label` classes Task 7's generator edit uses. Visual target: `vbr-marketing/plans/assets/bt-homepage-canvas/Article.dc.html`.
 
-- [ ] **Step 1: Append the template block to `css/style.css`**
+- [x] **Step 1: Append the template block to `css/style.css`**
 
 Append exactly this block after the `END BTH HOMEPAGE 2026` marker (keep both banner comments; the final gate greps for them):
 
@@ -1048,7 +1048,7 @@ body .btt-quick-answer-label {
 
 Notes pinned in advance (do not deviate): the homepage no longer uses `.hero` (Task 3 replaced it with `bth-` classes), so the gradient `.hero` rule only affects interior pages, which is intended. If a listed class does not appear in `css/style.css` today that is fine; the rule still applies to the class used in page markup.
 
-- [ ] **Step 2: Validate and commit**
+- [x] **Step 2: Validate and commit**
 
 Run: `cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io && npm run validate`
 Expected: exit 0.
@@ -1070,7 +1070,7 @@ git commit -m "Give interior pages the Sunset Session template styling: dusk pag
 - Consumes: `btt-quick-answer` / `btt-quick-answer-label` CSS from Task 6.
 - Produces: regenerated answer/glossary pages carrying the labeled quick-answer and definition boxes.
 
-- [ ] **Step 1: Label the definition box in the glossary-term builder**
+- [x] **Step 1: Label the definition box in the glossary-term builder**
 
 In `aeo/scripts/generate-bt.mjs` (around line 142), find exactly:
 
@@ -1087,7 +1087,7 @@ Replace with:
 
 (The original line is followed by a `<p ...>${escHtml(cleanDef)}</p>`-style line; keep that line unchanged, the label div sits before it.)
 
-- [ ] **Step 2: Label the answer box in the question-page builder**
+- [x] **Step 2: Label the answer box in the question-page builder**
 
 In the same file (around line 332), find exactly:
 
@@ -1104,7 +1104,7 @@ Replace with:
 
 (Again the following `<p ...>` line stays unchanged.)
 
-- [ ] **Step 3: Let the CTA sections take the gradient band**
+- [x] **Step 3: Let the CTA sections take the gradient band**
 
 In the same file, replace EVERY occurrence (there are three, around lines 153, 347, 554) of:
 
@@ -1121,7 +1121,7 @@ with:
 Run: `grep -c 'cta-section" style="background: var(--bg-elevated)' /Users/zrobok/Code/volleyball_referee/aeo/scripts/generate-bt.mjs`
 Expected: `0`.
 
-- [ ] **Step 4: Regenerate and inspect the blast radius**
+- [x] **Step 4: Regenerate and inspect the blast radius**
 
 ```bash
 cd /Users/zrobok/Code/volleyball_referee/aeo && node scripts/generate-bt.mjs
@@ -1129,7 +1129,7 @@ git -C /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io status --p
 ```
 Expected: the changed files are ONLY under `answers/`, `glossary/`, `rules-reference/`, plus possibly `llms.txt`, `sitemap.xml`, `robots.txt`, and root `*.md` mirrors. If anything else changed (any root `.html`, `css/`, `js/`), STOP and report; do not commit. Also confirm the volleyball site repo is untouched: `git -C /Users/zrobok/Code/volleyball_referee/volleyref.github.io status --porcelain` must show no NEW changes caused by this run (if it was dirty before, compare against what Task 1 would have seen; when in doubt STOP and report).
 
-- [ ] **Step 5: Validate and commit both repos**
+- [x] **Step 5: Validate and commit both repos**
 
 Run: `cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io && npm run validate`
 Expected: exit 0.
@@ -1155,7 +1155,7 @@ git commit -m "Regenerate rules content with the redesigned answer and glossary 
 - Consumes: nothing from other tasks (self-contained inline styles by design, since 404 renders for broken URLs where relative CSS may not resolve; keep whatever stylesheet link the head already has).
 - Produces: nothing downstream.
 
-- [ ] **Step 1: Replace the 404 body content**
+- [x] **Step 1: Replace the 404 body content**
 
 In `404.html`, keep the entire `<head>` and keep every `<script>` tag inside `<body>` (GA4/analytics). Replace all OTHER content inside `<body>` with:
 
@@ -1184,7 +1184,7 @@ In `404.html`, keep the entire `<head>` and keep every `<script>` tag inside `<b
 
 (If `/answers/` does not resolve to a page in this repo, point that second link at an existing hub page such as `/beach-tennis-guide.html` instead; check with `ls answers/index.html` first.)
 
-- [ ] **Step 2: Validate and commit**
+- [x] **Step 2: Validate and commit**
 
 Run: `cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io && npm run validate`
 Expected: exit 0.
@@ -1200,12 +1200,12 @@ git commit -m "Give the missing-page screen the Sunset Session look"
 
 **Files:** none modified (fix-forward only if a gate fails, then re-run all gates).
 
-- [ ] **Step 1: Validator**
+- [x] **Step 1: Validator**
 
 Run: `cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io && npm run validate`
 Expected: exit 0.
 
-- [ ] **Step 2: No CSS selector was renamed or removed**
+- [x] **Step 2: No CSS selector was renamed or removed**
 
 ```bash
 cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io
@@ -1214,7 +1214,7 @@ comm -23 /tmp/bt-selectors-before.txt /tmp/bt-selectors-after.txt
 ```
 Expected: empty output (every pre-existing selector still exists). Any line printed is a selector you removed; restore it.
 
-- [ ] **Step 3: Structure markers present exactly once each**
+- [x] **Step 3: Structure markers present exactly once each**
 
 ```bash
 grep -c "BT SUNSET 2026 OVERRIDES" css/style.css
@@ -1235,7 +1235,7 @@ git -C /Users/zrobok/Code/volleyball_referee/aeo log --oneline -1
 ```
 Expected: clean status; the latest commit is Task 7's.
 
-- [ ] **Step 4: Copy hygiene beyond the validator**
+- [x] **Step 4: Copy hygiene beyond the validator**
 
 ```bash
 cd /Users/zrobok/Code/volleyball_referee/beachtennisref.github.io
@@ -1246,7 +1246,7 @@ grep -rn "volleyref" index.html 404.html || echo "clean"
 ```
 Expected: `clean`, `clean`, `1`, `clean`.
 
-- [ ] **Step 5: Report**
+- [x] **Step 5: Report**
 
 Report to the user: tasks completed, every gate's actual output (pass/fail), files changed (`git log --oneline` for this session's commits), and this exact verification ask: "Run `cd beachtennisref.github.io && python3 -m http.server 8080` and open http://localhost:8080/ plus two interior pages (a glossary page and beach-tennis-vs-padel.html) to visually confirm the new theme. Nothing has been pushed."
 
