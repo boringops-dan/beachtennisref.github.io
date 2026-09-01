@@ -1,5 +1,6 @@
 // Live-story stage: phones join one live beach tennis match beat by beat.
-// Beat 5 drops the signal (offline, still scoring); beat 6 resyncs.
+// Beat 5 drops the signal (offline, still scoring, dashed mesh links light up
+// between the still-connected devices); beat 6 resyncs.
 // Auto-advances in view, rail buttons jump to a beat, reduced motion
 // shows the resync finale statically.
 document.addEventListener('DOMContentLoaded', function() {

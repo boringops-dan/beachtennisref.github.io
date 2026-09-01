@@ -170,7 +170,7 @@ test('the three banner blocks are appended in order', () => {
 test('BTH homepage block defines the dusk hero gradient', () => {
   assert.ok(
     CSS_NORM.includes(
-      'linear-gradient(180deg, #2B1B4D 0%, #7A2E63 38%, #E85D50 68%, #FFA24B 88%, #FFD07A 100%)',
+      'linear-gradient(180deg, #1E1230 0%, #2B1B4D 30%, #7A2E63 62%, #E85D50 86%, #FFA24B 95%, #FFD07A 100%)',
     ),
   );
 });
@@ -182,7 +182,7 @@ test('BTH homepage block defines the key section classes', () => {
     '.bth-hero-badge', '.bth-hero-h1', '.bth-scorecard', '.bth-price-card-hi',
     '.bth-price-flag', '.bth-faq-item', '.bth-story-stage', '.bth-story-rail',
     '.bth-story-step', '.bth-node-you', '.bth-linkset.is-on .bth-link',
-    '.bth-pulse', '.bth-ring', '.bth-story-stamp', '.bth-story-caption',
+    '.bth-pulse', '.bth-mesh', '.bth-story-stamp', '.bth-story-caption',
     '.bth-final', '.bth-final-sun',
   ]) {
     assert.ok(CSS_NORM.includes(`${selector} {`), `missing homepage rule for ${selector}`);

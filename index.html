@@ -248,29 +248,8 @@
             <div class="bth-chip">Change of ends</div>
           </div>
         </div>
-        <div class="bth-scorecard">
-          <div class="bth-scorecard-head">
-            <div class="bth-scorecard-label">MATCH TIE-BREAK</div>
-            <div class="bth-scorecard-set">SET 3</div>
-          </div>
-          <div class="bth-scorecard-body">
-            <div class="bth-team-row">
-              <div class="bth-team-name">Ana &amp; Marta</div>
-              <div class="bth-team-score"><span class="bth-sets-note">6 &middot; 4</span><span class="bth-points">6</span></div>
-            </div>
-            <div class="bth-team-row bth-team-row-serving">
-              <div class="bth-team-name"><span class="bth-serve-dot"></span>Luca &amp; Rafa</div>
-              <div class="bth-team-score"><span class="bth-sets-note">4 &middot; 6</span><span class="bth-points">5</span></div>
-            </div>
-            <div class="bth-status-row">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="#FFC070" stroke-width="1.8"></circle><path d="M9 5 L 9 9 L 12 11" stroke="#FFC070" stroke-width="1.8" stroke-linecap="round"></path></svg>
-              <span>Rafa serves next, left side</span>
-            </div>
-            <div class="bth-status-row bth-status-row-highlight">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 6 L 15 6 M 15 6 L 11.5 2.5 M 15 6 L 11.5 9.5" stroke="#1E1230" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15 12 L 3 12 M 3 12 L 6.5 8.5 M 3 12 L 6.5 15.5 M 3 12 L 6.5 15.5" stroke="#1E1230" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              <span>Change of ends after the next point</span>
-            </div>
-          </div>
+        <div class="bth-shot bth-shot-scorecard">
+          <img src="images/screenshots/rules-tiebreak.png" alt="Beach Tennis Ref showing a match tie-break with the serving side and change of ends called automatically" loading="lazy" width="2560" height="1600">
         </div>
       </div>
     </div>
@@ -302,7 +281,7 @@
     <div class="bth-inner">
       <div class="bth-story-head">
         <div class="bth-eyebrow">The live story</div>
-        <h2 class="bth-h2">One match. Every phone on the beach. Even with the signal gone.</h2>
+        <h2 class="bth-h2">One match. Every phone on the beach. <em>Even with the signal gone.</em></h2>
       </div>
       <div class="bth-story-stage" data-step="1" aria-label="How phones join one live match, step by step">
         <svg class="bth-story-links" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
@@ -326,15 +305,19 @@
             <circle class="bth-port" cx="550" cy="115" r="4"></circle>
             <circle class="bth-port" cx="780" cy="400" r="4"></circle>
           </g>
-          <path id="bt-ring" class="bth-ring" d="M180 300 a110 110 0 1 0 220 0 a110 110 0 1 0 -220 0"></path>
-          <circle class="bth-pulse bth-pulse-cloud is-on" r="6"><animateMotion dur="1.5s" begin="0s" repeatCount="indefinite"><mpath href="#bt-link-you"></mpath></animateMotion></circle>
-          <circle class="bth-pulse bth-pulse-cloud is-on" r="6"><animateMotion dur="1.5s" begin="0.4s" repeatCount="indefinite"><mpath href="#bt-link-court"></mpath></animateMotion></circle>
-          <circle class="bth-pulse bth-pulse-cloud is-on" r="6"><animateMotion dur="1.4s" begin="0.7s" repeatCount="indefinite"><mpath href="#bt-link-home"></mpath></animateMotion></circle>
-          <circle class="bth-pulse bth-pulse-cloud is-on" r="6"><animateMotion dur="1.6s" begin="1.0s" repeatCount="indefinite"><mpath href="#bt-link-desk"></mpath></animateMotion></circle>
-          <circle class="bth-pulse bth-pulse-local" r="6"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite"><mpath href="#bt-ring"></mpath></animateMotion></circle>
-          <circle class="bth-pulse bth-pulse-local" r="6"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#bt-ring"></mpath></animateMotion></circle>
+          <path id="bt-mesh-court" class="bth-mesh" data-on="5" d="M330 300 Q 560 250 790 205"></path>
+          <path id="bt-mesh-desk" class="bth-mesh" data-on="5" d="M340 350 Q 560 400 775 415"></path>
+          <path id="bt-mesh-court-desk" class="bth-mesh" data-on="5" d="M812 215 Q 840 320 800 395"></path>
+          <path id="bt-mesh-you-desk" class="bth-mesh" data-on="5" d="M320 330 Q 520 470 770 430"></path>
+          <circle class="bth-pulse bth-pulse-cloud" data-on="2" r="6"><animateMotion dur="1.5s" begin="0s" repeatCount="indefinite"><mpath href="#bt-link-you"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-cloud" data-on="3" r="6"><animateMotion dur="1.5s" begin="0.4s" repeatCount="indefinite"><mpath href="#bt-link-court"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-cloud" data-on="4" r="6"><animateMotion dur="1.4s" begin="0.7s" repeatCount="indefinite"><mpath href="#bt-link-home"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-cloud" data-on="4" r="6"><animateMotion dur="1.6s" begin="1.0s" repeatCount="indefinite"><mpath href="#bt-link-desk"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-local" r="6"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite"><mpath href="#bt-mesh-court"></mpath></animateMotion></circle>
+          <circle class="bth-pulse bth-pulse-local" r="6"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#bt-mesh-desk"></mpath></animateMotion></circle>
         </svg>
         <div class="bth-node bth-node-you" data-on="1">
+          <img src="images/screenshots/scoreboard.png" alt="The referee's live beach tennis scoring screen" loading="lazy" width="2560" height="1600">
           <span class="bth-node-label" style="color: var(--accent);">YOU &middot; ON COURT</span>
           <span class="bth-node-scorechip" data-youscore>0 - 0</span>
         </div>
@@ -347,7 +330,7 @@
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M10.5 19h3"></path></svg>
           <span class="bth-node-label">COURTSIDE</span>
           <span class="bth-node-sub" data-watchers>+8 watching</span>
-          <span class="bth-node-down-tag bth-tag-wait">WAITING</span>
+          <span class="bth-node-down-tag bth-tag-direct">DIRECT</span>
         </div>
         <div class="bth-node bth-node-home" data-on="4">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M10.5 19h3"></path></svg>
@@ -358,7 +341,7 @@
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"></rect><path d="M10 18.5h4"></path></svg>
           <span class="bth-node-label">TOURNAMENT DESK</span>
           <span class="bth-node-scorechip" data-deskscore>5 - 3</span>
-          <span class="bth-node-down-tag bth-tag-wait">WAITING</span>
+          <span class="bth-node-down-tag bth-tag-direct">DIRECT</span>
         </div>
         <div class="bth-story-stamp bth-stamp-offline"><strong>STILL WORKS.</strong><span class="bth-story-stamp-sub">Scoring doesn't need the internet. Every point saved on your phone.</span></div>
         <div class="bth-story-stamp bth-stamp-resync"><strong>ALL CAUGHT UP.</strong><span class="bth-story-stamp-sub">Everything synced the moment signal returned.</span></div>
@@ -388,9 +371,9 @@
         </div>
         <p class="bth-devices-sub">Phone, tablet, laptop: open the page and score. There are App Store and Play Store versions anyway, for people who like icons.</p>
         <div class="bth-device-row">
-          <div class="bth-device bth-device-phone">Phone</div>
-          <div class="bth-device bth-device-tablet">Tablet</div>
-          <div class="bth-device bth-device-laptop">Laptop</div>
+          <div class="bth-device bth-device-phone"><img src="images/screenshots/device-phone.png" alt="Beach Tennis Ref scoring on a phone" loading="lazy" width="1000" height="1866"></div>
+          <div class="bth-device bth-device-tablet"><img src="images/screenshots/device-tablet.png" alt="Beach Tennis Ref scoring on a tablet" loading="lazy" width="1600" height="2058"></div>
+          <div class="bth-device bth-device-laptop"><img src="images/screenshots/device-laptop.png" alt="Beach Tennis Ref scoring on a laptop" loading="lazy" width="2560" height="1670"></div>
         </div>
         <div class="bth-store-row">
           <a class="bth-store-badge" href="https://app.beachtennisref.app" data-cta="devices-appstore">App Store</a>

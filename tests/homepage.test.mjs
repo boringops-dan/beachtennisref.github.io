@@ -109,25 +109,15 @@ test('counting-problem cards', () => {
   }
 });
 
-test('rules-handled section keeps the approved sample match', () => {
+test('rules-handled section shows a real captured tie-break screenshot', () => {
   assert.ok(MAIN_NORM.includes('<section class="bth-section bth-rules" id="features">'));
   assert.ok(MAIN_NORM.includes('Scoreboard apps count taps. Beach Tennis Ref knows the rulebook.'));
   assert.ok(MAIN_NORM.includes('class="bth-chip">Serve order</div>'));
   assert.ok(MAIN_NORM.includes('class="bth-chip">Serving side</div>'));
   assert.ok(MAIN_NORM.includes('class="bth-chip">Tie-breaks</div>'));
   assert.ok(MAIN_NORM.includes('class="bth-chip">Change of ends</div>'));
-  assert.ok(MAIN_NORM.includes('>MATCH TIE-BREAK</div>'));
-  assert.ok(MAIN_NORM.includes('>SET 3</div>'));
-  // Approved sample content: teams, set scores, tie-break points.
-  assert.ok(MAIN_NORM.includes('Ana &amp; Marta'));
-  assert.ok(MAIN_NORM.includes('Luca &amp; Rafa'));
-  assert.ok(MAIN_NORM.includes('6 &middot; 4'));
-  assert.ok(MAIN_NORM.includes('4 &middot; 6'));
-  assert.ok(MAIN_NORM.includes('<span class="bth-points">6</span>'));
-  assert.ok(MAIN_NORM.includes('<span class="bth-points">5</span>'));
-  assert.ok(MAIN_NORM.includes('class="bth-team-row bth-team-row-serving"'));
-  assert.ok(MAIN_NORM.includes('Rafa serves next, left side'));
-  assert.ok(MAIN_NORM.includes('Change of ends after the next point'));
+  assert.ok(MAIN_NORM.includes('class="bth-shot bth-shot-scorecard"'));
+  assert.ok(MAIN_NORM.includes('src="images/screenshots/rules-tiebreak.png"'));
 });
 
 test('every-call-covered section lists the six call chips', () => {

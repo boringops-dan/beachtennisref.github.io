@@ -124,3 +124,76 @@ test('js/ holds exactly the three pre-existing files plus story.js', () => {
   const files = readdirSync(new URL('../js/', import.meta.url)).sort();
   assert.deepEqual(files, ['ab-testing.js', 'analytics.js', 'main.js', 'story.js']);
 });
+
+// Regression coverage for Task 2 (2026-08-31 plan): pulse dots must be
+// gated to the beat their link fires on, never hard-coded is-on.
+function storySvg() {
+  const m = HTML.match(/<svg class="bth-story-links"[\s\S]*?<\/svg>/);
+  assert.ok(m, 'story SVG not found');
+  return m[0];
+}
+const STORY_SVG = storySvg();
+
+test('no bth-pulse element carries a literal is-on class', () => {
+  const svg = STORY_SVG;
+  const tags = svg.match(/<circle class="bth-pulse[^>]*>/g) || [];
+  assert.ok(tags.length > 0, 'expected at least one bth-pulse circle');
+  for (const tag of tags) {
+    assert.ok(!/\bis-on\b/.test(tag), `pulse must not hard-code is-on: ${tag}`);
+  }
+});
+
+test('every .bth-pulse-cloud circle declares a data-on attribute', () => {
+  const svg = STORY_SVG;
+  const tags = svg.match(/<circle class="bth-pulse bth-pulse-cloud[^>]*>/g) || [];
+  assert.ok(tags.length > 0, 'expected at least one bth-pulse-cloud circle');
+  for (const tag of tags) {
+    assert.ok(/data-on="\d+"/.test(tag), `cloud pulse must declare data-on: ${tag}`);
+  }
+});
+
+test('each cloud pulse data-on matches the linkset data-on of the path it follows', () => {
+  const svg = STORY_SVG;
+
+  const linksetByPathId = {};
+  const linksetRe = /<g class="bth-linkset" data-on="(\d+)">([\s\S]*?)<\/g>/g;
+  let lm;
+  while ((lm = linksetRe.exec(svg))) {
+    const [, dataOn, body] = lm;
+    const pathMatch = body.match(/<path id="([^"]+)"/);
+    if (pathMatch) linksetByPathId[pathMatch[1]] = dataOn;
+  }
+  assert.ok(Object.keys(linksetByPathId).length > 0, 'expected at least one linkset');
+
+  const cloudTags = svg.match(/<circle class="bth-pulse bth-pulse-cloud[^>]*>[\s\S]*?<\/circle>/g) || [];
+  assert.ok(cloudTags.length > 0, 'expected at least one cloud pulse');
+  for (const tag of cloudTags) {
+    const dataOn = tag.match(/data-on="(\d+)"/);
+    const href = tag.match(/<mpath href="#([^"]+)">/);
+    assert.ok(dataOn && href, `cloud pulse missing data-on or mpath href: ${tag}`);
+    assert.equal(
+      dataOn[1],
+      linksetByPathId[href[1]],
+      `pulse targeting #${href[1]} must match its linkset's data-on`,
+    );
+  }
+});
+
+test('.bth-pulse-local circles declare no data-on (offline-only, CSS-driven)', () => {
+  const svg = STORY_SVG;
+  const tags = svg.match(/<circle class="bth-pulse bth-pulse-local[^>]*>/g) || [];
+  assert.ok(tags.length > 0, 'expected at least one bth-pulse-local circle');
+  for (const tag of tags) {
+    assert.ok(!/data-on=/.test(tag), `local pulse must not declare data-on: ${tag}`);
+  }
+});
+
+test('every mpath href in the story SVG resolves to an existing id', () => {
+  const svg = STORY_SVG;
+  const hrefs = [...svg.matchAll(/<mpath href="#([^"]+)">/g)].map((m) => m[1]);
+  assert.ok(hrefs.length > 0, 'expected at least one mpath');
+  const ids = new Set([...svg.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
+  for (const href of hrefs) {
+    assert.ok(ids.has(href), `mpath href #${href} has no matching id in the story SVG`);
+  }
+});
