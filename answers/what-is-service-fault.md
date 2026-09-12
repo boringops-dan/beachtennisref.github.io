@@ -1,6 +1,6 @@
 # What counts as a service fault in beach tennis?
 
-**Short Answer:** A service fault occurs when the served ball lands outside the service box, hits the net without landing in the correct box, the server foot-faults, or the server misses the ball completely when attempting to strike it.
+**Short Answer:** A service fault occurs when the served ball lands outside the correct service box, or the server foot-faults, or the server misses the ball entirely. A serve that hits the net and does not land in the correct box is also a fault.
 
 ## Full Explanation
 
