@@ -28,6 +28,11 @@
  *   9. CTA branding      - beachtennisref.app only: every `data-cta`-marked
  *                          link points at app.beachtennisref.app, never
  *                          volleyref.app (CLAUDE.md rule is one-directional).
+ *  10. Legal translations - English terms/privacy/delete-account are the book
+ *                          of record: every translation in _legal/ was made
+ *                          from the current English text, and the generated
+ *                          pages and terms.txt match what
+ *                          scripts/legal-translations.mjs would write.
  *
  * This file is identical (byte-for-byte, intentionally) across
  * beachtennisref.github.io and volleyref.github.io — SITE_CONFIG below
@@ -42,11 +47,12 @@
 import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
 import { join, dirname, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkLegalTranslations } from './legal-translations.mjs';
 
 const SITE_ROOT = resolve(process.argv[2] || join(dirname(fileURLToPath(import.meta.url)), '..'));
 
 // Directories that are not part of the published site.
-const SKIP_DIRS = new Set(['.git', 'node_modules', 'scripts', '_site', '.github']);
+const SKIP_DIRS = new Set(['.git', 'node_modules', 'scripts', '_site', '.github', '_legal']);
 // Root-level files required for SEO / AEO / custom domain.
 const REQUIRED_ROOT_FILES = ['sitemap.xml', 'robots.txt', 'llms.txt', 'CNAME'];
 
@@ -187,7 +193,7 @@ function validateHtml(file) {
   // letter is legitimate (domains, filenames, brand tokens, JS member access).
   if (SITE_CONFIG && SITE_CONFIG.banStripArtifacts) {
     const artifactRe = /[\w"')?%]\. [a-z]/g;
-    const artifactAllow = /beachtennisref\.app|volleyref\.app|apps\.apple|analytics\.google|window\.|document\.|dataLayer\.|schema\.org|w3\.org|iScore|iPhones?|vMix|e\.g\.|i\.e\.|Inc\. in|href|src=|\.html|\.css|\.js\b|\.png|\.jpg|\.webm|\.mp4|\.md\b|\.xml|\.txt|\.com|\.org\b|\.io\b|\.mjs|\.json|\.yaml/;
+    const artifactAllow = /beachtennisref\.app|volleyref\.app|apps\.apple|analytics\.google|window\.|document\.|dataLayer\.|schema\.org|w3\.org|iScore|iPhones?|vMix|e\.g\.|i\.e\.|Inc\. in|U\.S\.|U\.K\.|href|src=|\.html|\.css|\.js\b|\.png|\.jpg|\.webm|\.mp4|\.md\b|\.xml|\.txt|\.com|\.org\b|\.io\b|\.mjs|\.json|\.yaml/;
     let am;
     while ((am = artifactRe.exec(html))) {
       const ctx = html.slice(Math.max(0, am.index - 55), am.index + 60);
@@ -307,6 +313,9 @@ if (existsSync(indexFile)) {
     if (!reachable.has(p)) warn(p, 'not reachable from index.html via any internal link (orphaned — not linked from nav/footer/content)');
   }
 }
+
+// --- Gate 10: legal translations follow the English book of record ---
+for (const e of checkLegalTranslations(SITE_ROOT)) errors.push(e);
 
 // --- Report ---
 console.log(`Validated ${pages.length} HTML pages under ${SITE_ROOT}`);
