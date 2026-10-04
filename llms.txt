@@ -3,6 +3,12 @@
 > Beach tennis scorekeeping app with automatic ITF rule enforcement for referees, umpires, tournament organizers, and players.
 > Authoritative source for ITF beach tennis rules, glossary, and Q&A. All content is attributed to official ITF rulebooks.
 
+## App
+
+- Platforms: any web browser (phone, tablet, laptop, Chromebook) and a native Android app on Google Play.
+- Google Play: https://play.google.com/store/apps/details?id=app.beachtennisref.app
+- Web app: https://app.beachtennisref.app
+
 ## Site
 
 - [Homepage](https://beachtennisref.app/)

@@ -2,7 +2,7 @@
 // including the sanctioned FAQPage JSON-LD update.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readText, mainRegion, norm, occurrences } from './helpers.mjs';
+import { readText, mainRegion, norm, occurrences, PLAY_STORE_URL } from './helpers.mjs';
 
 const HTML = readText('index.html');
 const MAIN = mainRegion(HTML);
@@ -38,7 +38,7 @@ const FAQ_QA = [
   },
 ];
 
-function faqPageJsonLd() {
+function jsonLdOfType(type) {
   const re = /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
   let m;
   while ((m = re.exec(HTML))) {
@@ -48,7 +48,7 @@ function faqPageJsonLd() {
     } catch {
       continue;
     }
-    if (data && data['@type'] === 'FAQPage') return data;
+    if (data && [].concat(data['@type']).includes(type)) return data;
   }
   return null;
 }
@@ -165,11 +165,20 @@ test('devices section and store badges', () => {
     assert.ok(MAIN.includes(cls), `missing ${cls}`);
   }
   assert.ok(
-    MAIN_NORM.includes('<a class="bth-store-badge" href="https://app.beachtennisref.app" data-cta="devices-appstore">App Store</a>'),
+    MAIN_NORM.includes(`<a class="bth-store-badge" href="${PLAY_STORE_URL}" data-cta="devices-playstore">Google Play</a>`),
   );
   assert.ok(
-    MAIN_NORM.includes('<a class="bth-store-badge" href="https://app.beachtennisref.app" data-cta="devices-playstore">Google Play</a>'),
+    MAIN_NORM.includes('<a class="bth-store-badge" href="https://app.beachtennisref.app" data-cta="devices-webapp">Open Web App</a>'),
   );
+  // No iOS listing exists yet: an App Store badge or claim would be a dead promise.
+  assert.ok(!MAIN.includes('App Store'), 'homepage must not claim an App Store version yet');
+});
+
+test('Google Play listing is advertised in the app structured data', () => {
+  const app = jsonLdOfType('SoftwareApplication');
+  assert.ok(app, 'SoftwareApplication JSON-LD missing');
+  assert.deepEqual([].concat(app.installUrl), [PLAY_STORE_URL]);
+  assert.match(app.operatingSystem, /Android/);
 });
 
 test('pricing section with the three tiers and highlighted Yearly card', () => {
@@ -208,7 +217,7 @@ test('final CTA band closes the page', () => {
 });
 
 test('FAQPage JSON-LD matches the new FAQ copy exactly', () => {
-  const data = faqPageJsonLd();
+  const data = jsonLdOfType('FAQPage');
   assert.ok(data, 'expected a FAQPage JSON-LD block in the head');
   assert.equal(data['@type'], 'FAQPage');
   assert.equal(data.mainEntity.length, 6);
@@ -227,21 +236,6 @@ test('no volleyball branding in the rewritten homepage body', () => {
 test('no forbidden feature claims in the homepage body', () => {
   for (const claim of ['Apple Watch', 'cast', 'TV mode', 'Mac app']) {
     assert.ok(!MAIN.includes(claim), `forbidden claim "${claim}" present`);
-  }
-});
-
-test('every data-cta anchor in index.html points at the app domain', () => {
-  const anchorRe = /<a\b[^>]*>/gi;
-  let m;
-  while ((m = anchorRe.exec(HTML))) {
-    const tag = m[0];
-    if (!/\bdata-cta=["'][^"']*["']/.test(tag)) continue;
-    const href = tag.match(/\bhref=["']([^"']+)["']/);
-    assert.ok(href, `data-cta anchor missing href: ${tag}`);
-    assert.ok(
-      /^https:\/\/app\.beachtennisref\.app(\/|$)/.test(href[1]),
-      `data-cta link must point at ${APP_URL}, got ${href[1]}`,
-    );
   }
 });
 

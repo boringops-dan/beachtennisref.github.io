@@ -6,6 +6,9 @@ import { fileURLToPath } from 'node:url';
 
 export const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
+// The app's live Google Play listing (no iOS listing exists yet).
+export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=app.beachtennisref.app';
+
 export function readText(relPath) {
   return readFileSync(join(REPO_ROOT, relPath), 'utf8');
 }
