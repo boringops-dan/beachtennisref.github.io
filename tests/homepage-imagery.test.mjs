@@ -32,14 +32,21 @@ test('every <img src="images/...\"> in index.html points at a file that exists o
   }
 });
 
-test('every <img> in index.html has alt, width, height, and loading=lazy where required', () => {
+test('every <img> in index.html has alt, width, height, and a loading policy', () => {
   const imgTags = HTML.match(/<img\b[^>]*>/g) || [];
   assert.ok(imgTags.length > 0, 'expected at least one <img>');
   for (const tag of imgTags) {
     assert.match(tag, /\balt="[^"]+"/, `missing non-empty alt: ${tag}`);
     assert.match(tag, /\bwidth="\d+"/, `missing width: ${tag}`);
     assert.match(tag, /\bheight="\d+"/, `missing height: ${tag}`);
-    assert.match(tag, /\bloading="lazy"/, `missing loading=lazy: ${tag}`);
+    // The hero phone is the LCP image: eager + high priority. Everything
+    // below the fold stays lazy.
+    if (tag.includes('bth-hero') || tag.includes('device-phone.png" alt="Beach Tennis Ref scoring a doubles')) {
+      assert.match(tag, /\bloading="eager"/, `hero image must load eagerly: ${tag}`);
+      assert.match(tag, /\bfetchpriority="high"/, `hero image must be high priority: ${tag}`);
+    } else {
+      assert.match(tag, /\bloading="lazy"/, `missing loading=lazy: ${tag}`);
+    }
   }
 });
 

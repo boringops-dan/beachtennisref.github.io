@@ -62,15 +62,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Each beat lasts long enough to read its caption (~3 words per second
-  // plus settle time); the offline and resync beats hold a little longer.
-  var FIRST_BEAT_MS = 2200;
+  // Each beat lasts as long as a glance-reader needs for its caption
+  // (~5 words per second plus a short settle); the offline and resync beats
+  // are the payoff, so they hold a little longer.
+  var FIRST_BEAT_MS = 1800;
   function beatDuration(step) {
     if (step === 1) return FIRST_BEAT_MS;
     var cap = CAPTIONS[step - 1];
     var words = cap ? cap.x.split(/\s+/).length : 10;
-    var ms = Math.max(5000, Math.round((words / 3) * 1000) + 2500);
-    if (step === OFFLINE_STEP || step === FINAL_STEP) ms += 3000;
+    var ms = Math.max(2600, Math.round((words / 5) * 1000) + 900);
+    if (step === OFFLINE_STEP || step === FINAL_STEP) ms += 1200;
     return ms;
   }
 
@@ -87,15 +88,15 @@ document.addEventListener('DOMContentLoaded', function() {
     clearTimeout(resumeTimer);
     if (resumeAfterMs && !prefersReduced) {
       resumeTimer = setTimeout(function() {
-        storyTimer = setTimeout(advanceStory, 800);
+        storyTimer = setTimeout(advanceStory, 500);
       }, resumeAfterMs);
     }
   }
 
   stepButtons.forEach(function(btn) {
     btn.addEventListener('click', function() {
-      setStoryStep(parseInt(btn.dataset.stepBtn, 10), 9800);
-      pauseStory(9000);
+      setStoryStep(parseInt(btn.dataset.stepBtn, 10), 5000);
+      pauseStory(4500);
     });
   });
 

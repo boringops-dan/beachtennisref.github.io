@@ -48,12 +48,58 @@ test('story.js defines the six-beat offline/resync contract', () => {
   );
 });
 
-test('story.js runs on a reading-paced auto-advance timer', () => {
+test('story.js runs on a glance-paced auto-advance timer', () => {
   if (!storyExists) return;
   const n = norm(storyText());
-  assert.ok(n.includes('var FIRST_BEAT_MS = 2200'), 'first beat duration is 2200ms');
+  assert.ok(n.includes('var FIRST_BEAT_MS = 1800'), 'first beat duration is 1800ms');
   assert.ok(n.includes('function beatDuration(step)'), 'beat duration helper exists');
   assert.ok(n.includes('setTimeout(advanceStory, beat)'), 'advance schedules the next beat');
+});
+
+// Pacing contract: the user found the old ~42s loop (5-10s beats) too slow.
+// Evaluate the real beatDuration against the real captions.
+function loadPacing() {
+  const src = storyText();
+  const caps = src.match(/var CAPTIONS = (\[[\s\S]*?\]);/)[1];
+  const fn = src.match(/var FIRST_BEAT_MS = \d+;\s*function beatDuration\(step\) \{[\s\S]*?\n  \}/)[0];
+  const ctx = { OFFLINE_STEP: 5, FINAL_STEP: 6 };
+  vm.createContext(ctx);
+  vm.runInContext(`var CAPTIONS = ${caps}; ${fn}; this.beatDuration = beatDuration;`, ctx);
+  return ctx.beatDuration;
+}
+
+test('every beat lasts between 1.5s and 5.5s', () => {
+  if (!storyExists) return;
+  const beatDuration = loadPacing();
+  for (let step = 1; step <= 6; step += 1) {
+    const ms = beatDuration(step);
+    assert.ok(ms >= 1500 && ms <= 5500, `beat ${step} lasts ${ms}ms`);
+  }
+});
+
+test('one full loop of the story completes in under 25 seconds', () => {
+  if (!storyExists) return;
+  const beatDuration = loadPacing();
+  let total = 0;
+  for (let step = 1; step <= 6; step += 1) total += beatDuration(step);
+  assert.ok(total < 25000, `loop takes ${total}ms`);
+});
+
+test('the offline and resync payoff beats hold longer than their neighbours', () => {
+  if (!storyExists) return;
+  const beatDuration = loadPacing();
+  assert.ok(beatDuration(5) > beatDuration(4), 'offline beat must hold longer than beat 4');
+  assert.ok(beatDuration(6) > beatDuration(2), 'resync beat must hold longer than beat 2');
+});
+
+test('story transitions settle well inside the shortest beat', () => {
+  const css = readText('css/style.css');
+  for (const [selector, max] of [['.bth-link', 0.6], ['.bth-node', 0.4], ['.bth-mesh', 0.4]]) {
+    const block = css.match(new RegExp(`\\n\\${selector} \\{([^}]*)\\}`))[1];
+    const secs = [...block.matchAll(/(\d*\.?\d+)s\b/g)].map((m) => parseFloat(m[1]));
+    assert.ok(secs.length > 0, `${selector} must declare a transition`);
+    for (const s of secs) assert.ok(s <= max, `${selector} transition ${s}s exceeds ${max}s`);
+  }
 });
 
 test('story.js advances beats only while the stage is in view', () => {
@@ -72,14 +118,14 @@ test('story.js advances beats only while the stage is in view', () => {
   assert.ok(n.includes('pauseStory()'), 'auto-advance must pause off-screen');
 });
 
-test('story.js rail buttons jump to a beat and pause auto-advance ~9s', () => {
+test('story.js rail buttons jump to a beat and pause auto-advance ~5s', () => {
   if (!storyExists) return;
   const n = norm(storyText());
   assert.ok(
-    n.includes('setStoryStep(parseInt(btn.dataset.stepBtn, 10), 9800)'),
-    'clicking a rail button jumps with a 9800ms beat',
+    n.includes('setStoryStep(parseInt(btn.dataset.stepBtn, 10), 5000)'),
+    'clicking a rail button jumps with a 5000ms beat',
   );
-  assert.ok(n.includes('pauseStory(9000)'), 'clicking a rail button pauses for ~9s');
+  assert.ok(n.includes('pauseStory(4500)'), 'clicking a rail button pauses for ~4.5s');
 });
 
 test('story.js reduced-motion mode shows beat 6 statically', () => {

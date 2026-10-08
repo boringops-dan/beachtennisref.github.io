@@ -1,9 +1,10 @@
-// Spec test for Task 1 (hero contrast) of the 2026-08-31 plan.
-// Computes real WCAG contrast ratios from the declared CSS values so this
-// fails mechanically if anyone re-lightens the hero later.
+// Contrast contract for the Beach Day theme. Colors are resolved from the
+// declared CSS (tokens, scoped token overrides, rule declarations) and the
+// real WCAG ratio is computed, so a pairing that drifts below the floor
+// fails here instead of on a phone in the sun.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readText } from './helpers.mjs';
+import { readText, rootBlock } from './helpers.mjs';
 
 const CSS = readText('css/style.css');
 
@@ -16,7 +17,7 @@ function hexToRgb(hex) {
   };
 }
 
-function srgbLuminance(hex) {
+function luminance(hex) {
   const { r, g, b } = hexToRgb(hex);
   const chan = (c) => {
     const s = c / 255;
@@ -26,121 +27,165 @@ function srgbLuminance(hex) {
 }
 
 function ratio(a, b) {
-  const la = srgbLuminance(a);
-  const lb = srgbLuminance(b);
-  const lMax = Math.max(la, lb);
-  const lMin = Math.min(la, lb);
-  return (lMax + 0.05) / (lMin + 0.05);
+  const la = luminance(a);
+  const lb = luminance(b);
+  return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
 }
 
-function mix(fg, bg, alpha) {
-  const f = hexToRgb(fg);
-  const g = hexToRgb(bg);
-  const blend = (a, b) => Math.round(a * alpha + b * (1 - alpha));
-  const toHex = (n) => n.toString(16).padStart(2, '0');
-  return `#${toHex(blend(f.r, g.r))}${toHex(blend(f.g, g.g))}${toHex(blend(f.b, g.b))}`;
+function tokensIn(block) {
+  const out = {};
+  for (const m of block.matchAll(/(--[a-z0-9-]+)\s*:\s*([^;]+);/gi)) out[m[1]] = m[2].trim();
+  return out;
 }
 
-function declBlock(selector) {
-  const re = new RegExp(
-    selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([^}]*)\\}',
-  );
-  const m = CSS.match(re);
-  if (!m) throw new Error(`selector not found: ${selector}`);
-  return m[1];
+const ROOT = tokensIn(rootBlock(CSS));
+
+// Exact-selector rule lookup; the LAST declaration wins, as in the cascade.
+function rules(selector) {
+  const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`(?:^|[}\\n])\\s*${esc}\\s*\\{([^}]*)\\}`, 'g');
+  return [...CSS.matchAll(re)].map((m) => m[1]);
 }
 
-function declValue(block, prop) {
-  const re = new RegExp(prop.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*:\\s*([^;]+);');
-  const m = block.match(re);
-  if (!m) throw new Error(`property not found: ${prop}`);
-  return m[1].trim();
-}
-
-function px(value) {
-  const m = value.match(/(-?\d+(?:\.\d+)?)px/);
-  return m ? parseFloat(m[1]) : NaN;
-}
-
-// Assumed hero height (documented once here, not per-test) that the sun
-// clearance and gradient-sample checks below are both computed against.
-const HERO_HEIGHT = 1100;
-const HERO_BLOCK = declBlock('.bth-hero');
-const HERO_INNER_BLOCK = declBlock('.bth-hero-inner');
-const HERO_PADDING_BOTTOM = px(declValue(HERO_INNER_BLOCK, 'padding').split(/\s+/)[2]);
-
-test('.bth-hero gradient stops are parsed from the stylesheet', () => {
-  const bg = declValue(HERO_BLOCK, 'background');
-  assert.ok(bg.includes('linear-gradient'), 'hero must keep a gradient background');
-});
-
-test('the sun never sits behind hero text (>= 40px clearance)', () => {
-  const sunBlock = declBlock('.bth-hero-sun');
-  const sunBottom = px(declValue(sunBlock, 'bottom'));
-  const sunHeight = px(declValue(sunBlock, 'height'));
-  const sunTopFromBottom = sunBottom + sunHeight;
-
-  const clearance = HERO_PADDING_BOTTOM - sunTopFromBottom;
-  assert.ok(
-    clearance >= 40,
-    `sun must clear hero content by >= 40px, got ${clearance} (heroHeight ${HERO_HEIGHT})`,
-  );
-});
-
-test('the lightest gradient point under the hero text is dark enough for --text', () => {
-  const samplePoint = 1 - HERO_PADDING_BOTTOM / HERO_HEIGHT;
-  const bg = declValue(HERO_BLOCK, 'background');
-  const stopRe = /(#[0-9A-Fa-f]{6})\s+(\d+)%/g;
-  const stops = [];
-  let m;
-  while ((m = stopRe.exec(bg))) {
-    stops.push({ color: m[1].toUpperCase(), pos: parseInt(m[2], 10) / 100 });
-  }
-  assert.ok(stops.length >= 2, 'expected at least two gradient stops');
-
-  let lower = stops[0];
-  let upper = stops[stops.length - 1];
-  for (let i = 0; i < stops.length - 1; i += 1) {
-    if (samplePoint >= stops[i].pos && samplePoint <= stops[i + 1].pos) {
-      lower = stops[i];
-      upper = stops[i + 1];
-      break;
+function decl(selector, prop) {
+  let value = null;
+  for (const block of rules(selector)) {
+    for (const m of block.matchAll(/(?:^|;)\s*([a-z-]+)\s*:\s*([^;]+)/g)) {
+      if (m[1] === prop) value = m[2].trim();
     }
   }
-  const span = upper.pos - lower.pos;
-  const t = span === 0 ? 0 : (samplePoint - lower.pos) / span;
-  const sampled = mix(upper.color, lower.color, t);
+  if (value === null) throw new Error(`${prop} not declared on ${selector}`);
+  return value;
+}
 
-  const contrast = ratio('#FFF7EC', sampled);
-  assert.ok(
-    contrast >= 4.5,
-    `sampled gradient point ${sampled} at t=${samplePoint.toFixed(3)} must contrast >= 4.5:1 with #FFF7EC, got ${contrast.toFixed(2)}`,
-  );
+function resolve(value, scope = {}) {
+  const tokens = { ...ROOT, ...scope };
+  let v = value;
+  for (let i = 0; i < 6 && v.startsWith('var('); i += 1) {
+    const name = v.match(/var\((--[a-z0-9-]+)/i)[1];
+    v = tokens[name];
+    if (!v) throw new Error(`unresolved token ${name}`);
+  }
+  const hex = v.match(/#[0-9a-f]{6}/i);
+  if (!hex) throw new Error(`no solid color in "${value}"`);
+  return hex[0].toUpperCase();
+}
+
+const STORY_SCOPE = tokensIn(rules('.bth-story')[0]);
+
+function pair(selector, { scope, bgSelector } = {}) {
+  const fg = resolve(decl(selector, 'color'), scope);
+  const bg = resolve(decl(bgSelector || selector, 'background'), scope);
+  return { fg, bg, r: ratio(fg, bg) };
+}
+
+function assertAA(label, fg, bg, floor = 4.5) {
+  const r = ratio(fg, bg);
+  assert.ok(r >= floor, `${label}: ${fg} on ${bg} is ${r.toFixed(2)}:1, needs ${floor}:1`);
+}
+
+// The reported bug: `body .navbar a { color }` out-specified the nav CTA's
+// own label color, painting cream text on a cream pill. Nothing may set a
+// color on every link in the navbar again; links color themselves.
+// Any selector ending in a bare "a" under the nav (".navbar a",
+// ".nav-links a:hover") out-specifies ".btn-*" and repaints the CTA pills.
+function blanketNavLinkRules(prop) {
+  const out = [];
+  for (const m of CSS.matchAll(/([^{}]+)\{([^}]*)\}/g)) {
+    if (!new RegExp(`(^|;)\\s*${prop}\\s*:`).test(m[2])) continue;
+    for (const sel of m[1].split(',').map((x) => x.trim())) {
+      if (/\.(navbar|nav-links|nav-cta)\b[^,]*\sa(:[a-z-]+)*$/.test(sel)) out.push(sel);
+    }
+  }
+  return out;
+}
+
+test('no rule colors every navbar link wholesale', () => {
+  const offenders = blanketNavLinkRules('color');
+  assert.deepEqual(offenders, [], `a blanket nav-link color overrides button labels: ${offenders.join(' | ')}`);
 });
 
-test('the old cream-on-sun failure can never come back', () => {
-  assert.ok(
-    ratio('#FFE9D0', '#FFDE9E') < 1.5,
-    'documents why cream-on-sun was the original bug: near-illegible contrast',
-  );
+test('no rule paints a background on every navbar link', () => {
+  const offenders = blanketNavLinkRules('background');
+  assert.deepEqual(offenders, [], `a blanket nav-link background wipes the CTA fill: ${offenders.join(' | ')}`);
+});
 
-  for (const selector of ['.bth-hero-sub', '.bth-microcopy', '.bth-trust']) {
-    const block = declBlock(selector);
-    const color = declValue(block, 'color');
-    assert.notEqual(
-      color,
-      'var(--cream-warm)',
-      `${selector} must not use --cream-warm inside the hero`,
-    );
+test('nav primary CTA label is legible on its pill', () => {
+  const { fg, bg } = pair('body .btn-primary');
+  assertAA('nav Start Scoring Free', fg, bg);
+});
+
+test('nav Log In label is legible on the navbar ground', () => {
+  const fg = resolve(decl('body .btn-outline', 'color'));
+  const navBg = decl('body .navbar', 'background');
+  const m = navBg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  const toHex = (n) => Number(n).toString(16).padStart(2, '0');
+  const bg = m ? `#${toHex(m[1])}${toHex(m[2])}${toHex(m[3])}`.toUpperCase() : resolve(navBg);
+  assertAA('nav Log In', fg, bg);
+});
+
+test('nav primary hover keeps its label legible', () => {
+  const { fg, bg } = pair('body .btn-primary:hover');
+  assertAA('nav CTA hover', fg, bg);
+});
+
+test('hero and final CTA pills are legible', () => {
+  const hero = pair('.bth-pill-btn');
+  assertAA('hero CTA', hero.fg, hero.bg);
+  const fin = pair('.bth-final .bth-pill-btn');
+  assertAA('final CTA', fin.fg, fin.bg);
+});
+
+test('pricing buttons and the highlighted card are legible', () => {
+  const hi = pair('.bth-price-btn-hi');
+  assertAA('Choose Yearly', hi.fg, hi.bg);
+  const fg = resolve(decl('.bth-price-btn', 'color'));
+  const card = resolve(decl('.bth-price-card', 'background'));
+  assertAA('Choose Weekly/Monthly', fg, card);
+  const flag = pair('.bth-price-flag');
+  assertAA('Most popular flag', flag.fg, flag.bg);
+  const hiCard = resolve(decl('.bth-price-card-hi', 'background'));
+  assertAA('highlighted price', resolve(decl('.bth-price-card-hi', 'color')), hiCard);
+});
+
+test('every text token holds AA on every light ground', () => {
+  for (const text of ['--text', '--text-secondary', '--text-muted']) {
+    for (const ground of ['--bg', '--bg-warm', '--bg-elevated']) {
+      assertAA(`${text} on ${ground}`, resolve(`var(${text})`), resolve(`var(${ground})`));
+    }
   }
 });
 
-test('.bth-hero-sand still clips the sun and is painted after it', () => {
-  const sandBlock = declBlock('.bth-hero-sand');
-  assert.equal(declValue(sandBlock, 'background'), 'var(--bg)');
+test('the live-story stage keeps AA inside its night-sea token scope', () => {
+  for (const text of ['--text', '--text-secondary', '--text-muted', '--accent']) {
+    for (const ground of ['--bg-warm', '--bg-elevated']) {
+      assertAA(`story ${text} on ${ground}`, resolve(`var(${text})`, STORY_SCOPE), resolve(`var(${ground})`, STORY_SCOPE));
+    }
+  }
+  const tag = pair('.bth-node-down-tag', { scope: STORY_SCOPE });
+  assertAA('OFFLINE tag', tag.fg, tag.bg);
+  const stamp = pair('.bth-story-stamp', { scope: STORY_SCOPE });
+  assertAA('STILL WORKS stamp', stamp.fg, stamp.bg);
+});
 
-  const sunIndex = CSS.indexOf('.bth-hero-sun {');
-  const sandIndex = CSS.indexOf('.bth-hero-sand {');
-  assert.ok(sunIndex !== -1 && sandIndex !== -1, 'both rules must exist');
-  assert.ok(sandIndex > sunIndex, '.bth-hero-sand must be declared after .bth-hero-sun');
+test('the sea sections keep foam text legible', () => {
+  assertAA('rules section', resolve(decl('.bth-rules', 'color')), resolve(decl('.bth-rules', 'background')));
+  assertAA('interior CTA band', resolve('var(--foam)'), resolve(decl('body .cta-section', 'background')));
+  assertAA('interior CTA button', resolve(decl('body .cta-section .btn-primary', 'color')), resolve(decl('body .cta-section .btn-primary', 'background')));
+  assertAA('comparison table head', resolve(decl('body .comparison-table th', 'color')), resolve(decl('body .comparison-table th', 'background')));
+});
+
+test('the hero headline is legible on the lightest sky stop', () => {
+  const h1 = resolve(decl('.bth-hero-h1', 'color'));
+  const sky = decl('.bth-hero', 'background');
+  const stops = [...sky.matchAll(/#[0-9A-Fa-f]{6}/g)].map((m) => m[0]);
+  assert.ok(stops.length >= 2, 'hero sky must be a gradient');
+  for (const stop of stops) assertAA(`hero h1 on ${stop}`, h1, stop.toUpperCase());
+});
+
+test('the final band headline is legible on every sunset stop', () => {
+  const h2 = resolve(decl('.bth-final-h2', 'color'));
+  const stops = [...decl('.bth-final', 'background').matchAll(/#[0-9A-Fa-f]{6}/g)].map((m) => m[0]);
+  assert.ok(stops.length >= 2, 'final band must be a gradient');
+  for (const stop of stops) assertAA(`final h2 on ${stop}`, h2, stop.toUpperCase(), 3);
 });

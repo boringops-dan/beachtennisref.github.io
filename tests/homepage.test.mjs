@@ -59,14 +59,20 @@ test('the main-content wrapper is preserved', () => {
   assert.ok(MAIN.length > 0, 'main-content region must not be empty');
 });
 
-test('dusk hero with sun, sand, court, and badge', () => {
+test('daylight hero: sun, sea, sand, net, rally ball, promenade, real phone', () => {
   assert.ok(MAIN_NORM.includes('<header class="bth-hero">'));
-  for (const cls of ['bth-hero-sun', 'bth-hero-sand', 'bth-hero-court', 'bth-hero-inner']) {
-    assert.ok(MAIN.includes(`class="${cls}"`), `missing hero element ${cls}`);
+  for (const cls of ['bth-hero-sun', 'bth-hero-scene', 'bth-hero-sea', 'bth-hero-sand', 'bth-hero-court', 'bth-rally', 'bth-ball', 'bth-promenade', 'bth-hero-inner', 'bth-hero-copy', 'bth-hero-phone']) {
+    assert.ok(new RegExp(`class="[^"]*\\b${cls}\\b`).test(MAIN), `missing hero element ${cls}`);
   }
-  assert.ok(MAIN_NORM.includes('<div class="bth-hero-badge">The only app built for ITF beach tennis</div>'));
-  assert.ok(MAIN_NORM.includes('Play until the light goes.'));
-  assert.ok(MAIN_NORM.includes('The score keeps itself. Serve order, sides, tie-breaks, change of ends, handled every point.'));
+  assert.ok(MAIN_NORM.includes('<h1 class="bth-hero-h1">Just play. We\'ll keep score.</h1>'));
+  assert.ok(MAIN_NORM.includes('The only scoring app built for ITF beach tennis. Serve order, sides, tie-breaks and change of ends, handled every point.'));
+  assert.ok(MAIN.includes('src="images/screenshots/device-phone.png"'), 'hero shows the real captured app');
+});
+
+test('decorative hero scenery is hidden from assistive tech', () => {
+  for (const cls of ['bth-hero-sun', 'bth-hero-scene', 'bth-promenade']) {
+    assert.ok(MAIN.includes(`<div class="${cls}" aria-hidden="true">`), `${cls} must be aria-hidden`);
+  }
 });
 
 test('hero CTA and free-trial microcopy', () => {
@@ -90,10 +96,10 @@ test('free-trial line appears exactly once on the page', () => {
 });
 
 test('hero trust strip lists ITF rules, singles and doubles, offline', () => {
-  assert.ok(MAIN_NORM.includes('ITF RULES'));
-  assert.ok(MAIN_NORM.includes('SINGLES &amp; DOUBLES'));
-  assert.ok(MAIN_NORM.includes('WORKS OFFLINE'));
-  assert.ok(MAIN.includes('class="bth-trust-dot"'));
+  assert.ok(MAIN_NORM.includes('<ul class="bth-trust" role="list">'));
+  for (const item of ['ITF rules built in', 'Singles and doubles', 'Works offline']) {
+    assert.ok(MAIN_NORM.includes(`<li>${item}</li>`), `missing trust item ${item}`);
+  }
 });
 
 test('four section anchors required by the nav all exist', () => {
@@ -135,7 +141,7 @@ test('every-call-covered section lists the six call chips', () => {
 });
 
 test('live-story stage markup is complete', () => {
-  assert.ok(MAIN_NORM.includes('<section class="bth-section" id="how-it-works">'));
+  assert.ok(MAIN_NORM.includes('<section class="bth-section bth-story" id="how-it-works">'));
   assert.ok(MAIN_NORM.includes('class="bth-story-stage" data-step="1"'));
   assert.ok(MAIN_NORM.includes('class="bth-story-links"'));
   // The four linksets with their data-on beats (one per beat 2, 3, 4, 4).
@@ -210,6 +216,7 @@ test('FAQ section mirrors the FAQPage structured data', () => {
 
 test('final CTA band closes the page', () => {
   assert.ok(MAIN_NORM.includes('<section class="bth-final">'));
+  assert.ok(MAIN_NORM.includes('<div class="bth-final-sea" aria-hidden="true">'), 'the sun sets into the sea');
   assert.ok(MAIN_NORM.includes('<h2 class="bth-final-h2">The sun is going down. The court is ready. The score is our job.</h2>'));
   assert.ok(
     MAIN_NORM.includes('<a href="https://app.beachtennisref.app" class="bth-pill-btn" data-cta="final">Start Scoring Free</a>'),

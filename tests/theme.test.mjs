@@ -1,6 +1,6 @@
-// Spec tests for the shared stylesheet work in the Sunset Session redesign:
-// Task 2 (token swap + override layer), Task 6 (BTT template layer),
-// and the Task 9 CSS-structure gates.
+// Spec tests for the shared stylesheet: the Beach Day token set, its
+// override layer, the BTH homepage and BTT template layers, and the
+// CSS-structure gates.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readText, rootBlock, norm, occurrences, REPO_ROOT } from './helpers.mjs';
@@ -10,44 +10,46 @@ const CSS_NORM = norm(CSS);
 
 const OLD_LITERALS = ['#09090b', '#0d0b0a', '#fafafa', '#a1a1aa', '#52525b'];
 
-// Every token VALUE the plan's Task 2 Step 2 mandates inside the existing
-// :root block (name -> exact value). Radius variables are intentionally kept
-// as-is and are asserted separately below.
+// Every Beach Day token VALUE inside the :root block (name -> exact value).
+// Radius variables are asserted separately below.
 const TOKENS = {
-  '--primary': '#E85D50',
-  '--primary-dark': '#D14A3E',
-  '--primary-light': '#FF8A4B',
-  '--accent': '#FFC070',
-  '--accent-light': '#FFDE9E',
-  '--success': '#22c55e',
-  '--warning': '#FFC531',
-  '--rose': '#A84462',
-  '--bg': '#1E1230',
-  '--bg-warm': '#241539',
-  '--bg-elevated': '#2B1B4D',
-  '--text': '#FFF7EC',
-  '--text-secondary': '#C9B8D6',
-  '--text-muted': '#9C8BAC',
-  '--glass-bg': '#2B1B4D',
-  '--glass-bg-hover': '#322050',
-  '--glass-border': '#3C2865',
-  '--glass-border-hover': '#FFC070',
+  '--primary': '#C2402F',
+  '--primary-dark': '#A33424',
+  '--primary-light': '#E8604C',
+  '--accent': '#0B6E78',
+  '--accent-light': '#FFC933',
+  '--success': '#1F8A4C',
+  '--warning': '#FFC933',
+  '--rose': '#E8604C',
+  '--bg': '#F2FBFA',
+  '--bg-warm': '#F7E8C8',
+  '--bg-elevated': '#FFFFFF',
+  '--text': '#0C2E35',
+  '--text-secondary': '#3B5A60',
+  '--text-muted': '#4A646B',
+  '--glass-bg': '#FFFFFF',
+  '--glass-bg-hover': '#FFFDF6',
+  '--glass-border': '#D5E8E6',
+  '--glass-border-hover': '#0B6E78',
   '--glass-specular': 'rgba(255, 255, 255, 0)',
   '--glass-blur': '0px',
   '--glass-saturate': '100%',
-  '--gradient-primary': 'linear-gradient(135deg, #E85D50, #FFA24B)',
-  '--gradient-warm': 'linear-gradient(135deg, #7A2E63, #E85D50)',
-  '--shadow-sm': '0 4px 16px rgba(20, 10, 34, 0.4)',
-  '--shadow-md': '0 8px 32px rgba(20, 10, 34, 0.45)',
-  '--shadow-lg': '0 20px 60px rgba(20, 10, 34, 0.55)',
-  '--shadow-glow':
-    '0 0 50px rgba(255, 138, 75, 0.12), 0 0 100px rgba(232, 93, 80, 0.06)',
-  '--shadow-glow-strong':
-    '0 0 60px rgba(255, 138, 75, 0.2), 0 0 120px rgba(232, 93, 80, 0.1)',
+  '--gradient-primary': 'linear-gradient(135deg, #0B6E78, #0E8C8F)',
+  '--gradient-warm': 'linear-gradient(135deg, #FFC933, #F0584A)',
   "--font-display": "'Bricolage Grotesque', 'Avenir Next', 'Trebuchet MS', sans-serif",
   "--font-body": "'Instrument Sans', 'Helvetica Neue', Arial, sans-serif",
-  '--ink': '#150C22',
+  '--ink': '#0C2E35',
+  '--sea': '#0B6E78',
+  '--sky': '#8EE3E6',
+  '--sand': '#F5E3BD',
+  '--sun': '#FFC933',
+  '--coral': '#F0584A',
+  '--foam': '#FFFAF0',
 };
+
+// The purple dusk palette the Beach Day redesign replaced. None of it may
+// come back as a token or a literal.
+const PURPLE_LITERALS = ['#1E1230', '#241539', '#2B1B4D', '#322050', '#3C2865', '#7A2E63', '#4A2058', '#C9B8D6', '#9C8BAC', '#150C22', '#1A0F2B'];
 
 // Selectors present in css/style.css at the base commit (Task 1 Step 3
 // snapshot). Task 9 Step 2 forbids renaming or removing any of them.
@@ -94,7 +96,7 @@ test('Bricolage import appears exactly once', () => {
   assert.equal(occurrences(CSS, 'fonts.googleapis.com/css2?family=Bricolage'), 1);
 });
 
-test('every Sunset token value is set in the :root block', () => {
+test('every Beach Day token value is set in the :root block', () => {
   const block = norm(rootBlock(CSS));
   assert.ok(block, 'expected a :root { ... } block');
   for (const [name, value] of Object.entries(TOKENS)) {
@@ -129,8 +131,15 @@ test('the ambient body::before glow is retained', () => {
   assert.match(CSS, /body::before\s*\{/);
 });
 
-test('Sunset override layer is appended with its banner markers', () => {
-  assert.equal(occurrences(CSS, 'BT SUNSET 2026 OVERRIDES'), 2);
+test('Beach Day override layer is appended with its banner markers', () => {
+  assert.equal(occurrences(CSS, 'BT BEACH DAY 2026 OVERRIDES'), 2);
+  assert.equal(occurrences(CSS, 'BT SUNSET 2026'), 0);
+});
+
+test('the purple dusk palette is gone from the stylesheet', () => {
+  for (const literal of PURPLE_LITERALS) {
+    assert.ok(!CSS.toUpperCase().includes(literal), `style.css must not contain ${literal}`);
+  }
 });
 
 test('BTH homepage and BTT template banner markers each appear twice', () => {
@@ -139,15 +148,14 @@ test('BTH homepage and BTT template banner markers each appear twice', () => {
 });
 
 test('override layer restyles nav, buttons, and footer', () => {
-  const block = CSS.slice(CSS.indexOf('BT SUNSET 2026 OVERRIDES'));
+  const block = CSS.slice(CSS.indexOf('BT BEACH DAY 2026 OVERRIDES'));
   const nb = norm(block);
   for (const fragment of [
     'body { font-family: var(--font-body); background: var(--bg); color: var(--text); }',
-    'body .navbar { background: var(--bg); color: var(--text); border-bottom: 1px solid #322050; backdrop-filter: none; }',
-    'body .nav-links a:hover { color: var(--accent); }',
-    'body .btn-primary { background: #FFF7EC; color: #7A2E63; border: none; border-radius: var(--radius-pill); font-weight: 700; box-shadow: none; }',
-    'body .btn-outline { background: transparent; color: inherit; border: 2px solid var(--text-secondary); border-radius: var(--radius-pill); }',
-    'body .footer { background: var(--ink); color: var(--text-secondary); }',
+    'body .nav-links a:not(.btn):hover, body .nav-links a.section-active { color: var(--accent);',
+    'body .btn-primary { background: var(--sun); color: var(--ink);',
+    'body .btn-outline { background: transparent; color: var(--text); border: 2px solid var(--text);',
+    'body .footer { background: var(--ink);',
   ]) {
     assert.ok(nb.includes(fragment), `missing override fragment: ${fragment}`);
   }
@@ -160,26 +168,25 @@ test('old-theme hard-coded literals are swept from style.css', () => {
 });
 
 test('the three banner blocks are appended in order', () => {
-  const o = CSS.indexOf('BT SUNSET 2026 OVERRIDES');
+  const o = CSS.indexOf('BT BEACH DAY 2026 OVERRIDES');
   const h = CSS.indexOf('BTH HOMEPAGE 2026');
   const t = CSS.indexOf('BTT TEMPLATES 2026');
   assert.ok(o !== -1 && h !== -1 && t !== -1, 'all three banner blocks present');
   assert.ok(o < h && h < t, 'override layer, then BTH homepage block, then BTT template block');
 });
 
-test('BTH homepage block defines the dusk hero gradient', () => {
-  assert.ok(
-    CSS_NORM.includes(
-      'linear-gradient(180deg, #1E1230 0%, #2B1B4D 30%, #7A2E63 62%, #E85D50 86%, #FFA24B 95%, #FFD07A 100%)',
-    ),
-  );
+test('BTH homepage block paints a daylight sky, rolling sea, sand and promenade hero', () => {
+  assert.ok(CSS_NORM.includes('.bth-hero { position: relative; overflow: hidden; background: linear-gradient(180deg, #7FDCE0 0%, #B6EDEA 46%, #E2F7F3 100%); }'));
+  for (const selector of ['.bth-hero-sun', '.bth-hero-sea', '.bth-wave-back', '.bth-wave-front', '.bth-hero-sand', '.bth-hero-court', '.bth-rally', '.bth-ball', '.bth-promenade']) {
+    assert.ok(CSS_NORM.includes(`${selector} {`), `missing hero rule for ${selector}`);
+  }
 });
 
 test('BTH homepage block defines the key section classes', () => {
   for (const selector of [
     '.bth-section', '.bth-inner', '.bth-eyebrow', '.bth-h2', '.bth-pill-btn',
     '.bth-microcopy', '.bth-hero-sun', '.bth-hero-sand', '.bth-hero-inner',
-    '.bth-hero-badge', '.bth-hero-h1', '.bth-scorecard', '.bth-price-card-hi',
+    '.bth-hero-copy', '.bth-hero-phone', '.bth-hero-h1', '.bth-story', '.bth-scorecard', '.bth-price-card-hi',
     '.bth-price-flag', '.bth-faq-item', '.bth-story-stage', '.bth-story-rail',
     '.bth-story-step', '.bth-node-you', '.bth-linkset.is-on .bth-link',
     '.bth-pulse', '.bth-mesh', '.bth-story-stamp', '.bth-story-caption',
@@ -204,13 +211,13 @@ test('BTT template layer restyles the shared interior classes', () => {
   const block = norm(CSS.slice(CSS.indexOf('BTT TEMPLATES 2026')));
   for (const fragment of [
     'body .section-label { display: inline-flex; align-items: center;',
-    'color: var(--primary-light);',
-    'body .breadcrumb { font-weight: 600; font-size: 13px; color: var(--text-secondary); }',
+    'text-transform: none; color: var(--accent);',
+    'body .breadcrumb { font-weight: 600; font-size: 14px; color: var(--text-secondary); }',
     'body .feature-card, body .problem-card, body .benefit-card {',
     'body .faq-item {',
-    'body .comparison-table th { background: #1A0F2B;',
-    'background: linear-gradient(180deg, #7A2E63 0%, #E85D50 70%, #FFA24B 100%);',
-    'background: linear-gradient(160deg, #2B1B4D 0%, #7A2E63 70%, #A84462 100%);',
+    'body .comparison-table th { background: var(--sea); color: var(--foam);',
+    'body .cta-section { background: var(--sea); }',
+    'background: linear-gradient(180deg, #8EE3E6 0%, #C4F0EC 60%, #E6F8F4 100%);',
     'body .btt-quick-answer {',
     'body .btt-quick-answer-label {',
     'text-transform: uppercase; color: var(--accent); margin-bottom: 10px;',

@@ -1,4 +1,4 @@
-// Spec tests for the rebuilt 404 page (Task 8): the Sunset Session
+// Spec tests for the rebuilt 404 page (Task 8): the Beach Day
 // "Long. Out." screen with its inline-styled scoreboard and gradient, while
 // the analytics script tag is preserved.
 import { test } from 'node:test';
@@ -18,12 +18,13 @@ test('404 shows the "Long. Out." headline and copy', () => {
   );
 });
 
-test('404 renders the sunset gradient wrapper', () => {
+test('404 renders the daylight sky-to-sand wrapper', () => {
   assert.ok(
     HTML.includes(
-      'linear-gradient(180deg, #2B1B4D 0%, #7A2E63 45%, #E85D50 80%, #FFA24B 100%)',
+      'linear-gradient(180deg, #7FDCE0 0%, #B6EDEA 55%, #F6E2B8 82%, #EED19A 100%); color: #0C2E35;',
     ),
   );
+  assert.ok(!/#2B1B4D|#7A2E63|#1E1230|#d4a24a/i.test(HTML), 'no purple or old gold left on the 404');
 });
 
 test('404 scoreboard shows YOU : THIS PAGE 40-4', () => {
