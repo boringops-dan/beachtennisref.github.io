@@ -109,6 +109,30 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://beachtennisref.app/fr/privacy.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/de/privacy.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/it/privacy.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/pl/privacy.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://beachtennisref.app/terms.html</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>yearly</changefreq>
@@ -127,6 +151,30 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://beachtennisref.app/fr/terms.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/de/terms.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/it/terms.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/pl/terms.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://beachtennisref.app/delete-account.html</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>yearly</changefreq>
@@ -141,6 +189,30 @@
   <url>
     <loc>https://beachtennisref.app/pt/delete-account.html</loc>
     <lastmod>2026-09-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/fr/delete-account.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/de/delete-account.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/it/delete-account.html</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://beachtennisref.app/pl/delete-account.html</loc>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
